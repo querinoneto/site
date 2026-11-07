@@ -50,7 +50,9 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 .lead { margin-top: 1.25rem; max-width: 32rem; font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.45; }
 .oab { margin-top: .35rem; color: var(--mute); }
 
-.links { margin-top: 1.75rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; max-width: 30rem; }
+.links { margin-top: 1.75rem; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .6rem; max-width: 30rem; }
+.links > .lk { grid-column: span 3; }
+.links > .lk.sm { grid-column: span 2; }
 .lk {
   display: flex; align-items: center; justify-content: space-between; gap: .75rem;
   height: 3rem; padding: 0 1rem; border: 1px solid var(--ink); background: transparent; color: var(--ink);
@@ -58,7 +60,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   transition: transform .2s ease, background-color .2s ease, color .2s ease;
 }
 .lk .ar { font-family: var(--mono); font-size: .8rem; transition: transform .2s ease; }
-.lk.primary { grid-column: 1 / -1; background: var(--ink); color: var(--paper); }
+.links > .lk.primary { grid-column: 1 / -1; background: var(--ink); color: var(--paper); }
 @media (hover: hover) {
   .lk:hover { background: var(--ink); color: var(--paper); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--line); }
   .lk:hover .ar { transform: translateX(3px); }
@@ -95,6 +97,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   .lead { margin-top: .6rem; font-size: 1rem; }
   .links { margin-top: 1rem; gap: .5rem; max-width: none; }
   .lk { height: 2.75rem; font-size: .9rem; }
+  .lk.sm { padding: 0 .75rem; }
 }
 @media (max-width: 860px) and (max-height: 640px) { .lead { font-size: .92rem; } .lk { height: 2.5rem; } }
 
@@ -144,9 +147,10 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
       <nav class="links" aria-label="Contato e redes sociais">
         <button class="lk primary" type="button" id="openForm">Enviar mensagem <span class="ar" aria-hidden="true">→</span></button>
         <a class="lk" href="https://wa.me/5582987036738" target="_blank" rel="noopener">WhatsApp <span class="ar" aria-hidden="true">↗</span></a>
-        <a class="lk" hidden data-todo="instagram" href="https://www.instagram.com/__INSTAGRAM__/" target="_blank" rel="noopener">Instagram <span class="ar" aria-hidden="true">↗</span></a>
-        <a class="lk" hidden data-todo="linkedin" href="https://www.linkedin.com/in/__LINKEDIN__/" target="_blank" rel="noopener">LinkedIn <span class="ar" aria-hidden="true">↗</span></a>
         <button class="lk" type="button" id="copyMail" title="contato@querinoneto.com.br">E-mail <span class="ar" id="mailAr" aria-hidden="true">⧉</span></button>
+        <a class="lk sm" href="https://www.instagram.com/querinoneto/" target="_blank" rel="noopener">Instagram <span class="ar" aria-hidden="true">↗</span></a>
+        <a class="lk sm" href="https://x.com/querinoneto" target="_blank" rel="noopener">X <span class="ar" aria-hidden="true">↗</span></a>
+        <a class="lk sm" href="https://www.linkedin.com/in/querinoneto/" target="_blank" rel="noopener">LinkedIn <span class="ar" aria-hidden="true">↗</span></a>
       </nav>
       <p class="status" id="mstatus" role="status" aria-live="polite"></p>
     </div>
