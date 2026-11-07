@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Querino Neto</title>
+<meta name="description" content="José Querino de Macêdo Neto, advogado. Contato e redes sociais.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Plano: cartão de visita de uma tela só, branco e preto do logotipo.
+   Layout: retrato esfumaçado + saudação + links, tudo visível sem rolar. */
+:root {
+  --paper: #fefefe;
+  --ink: #232323;
+  --mute: #6a6a6a;
+  --line: #d8d8d8;
+  --haze: #e9e9e9;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "DM Mono", ui-monospace, Menlo, monospace;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --hh: 3.5rem;
+  color-scheme: light;
+}
+:root[data-inv] { --paper: #232323; --ink: #fefefe; --mute: #a8a8a8; --line: #444; --haze: #3a3a3a; color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.5 var(--body); overflow-x: hidden; transition: background-color .35s ease, color .35s ease; }
+h1, p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+
+.page { height: 100dvh; min-height: 34rem; display: flex; flex-direction: column; overflow: clip; }
+.bar { flex: none; height: var(--hh); border-bottom: 1px solid var(--line); }
+.bar .in { height: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; }
+.brand { font-weight: 700; letter-spacing: -.01em; }
+.icon-btn { display: inline-flex; align-items: center; gap: .5rem; height: 2.25rem; padding: 0 .8rem; background: none; color: inherit; border: 1px solid var(--ink); cursor: pointer; font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.icon-btn svg { width: .95rem; height: .95rem; }
+@media (hover: hover) { .icon-btn:hover { background: var(--line); } }
+.icon-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.main { flex: 1; min-height: 0; width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(1rem, 4vw, 3rem); }
+.copy { align-self: center; position: relative; z-index: 3; padding: 1rem 0; }
+h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: -.04em; white-space: nowrap; }
+.lead { margin-top: 1.25rem; max-width: 32rem; font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.45; }
+.oab { margin-top: .35rem; color: var(--mute); }
+
+.links { margin-top: 1.75rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; max-width: 30rem; }
+.lk {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  height: 3rem; padding: 0 1rem; border: 1px solid var(--ink); background: transparent; color: var(--ink);
+  text-decoration: none; cursor: pointer; font: 500 .95rem/1 var(--body); text-align: left;
+  transition: transform .2s ease, background-color .2s ease, color .2s ease;
+}
+.lk .ar { font-family: var(--mono); font-size: .8rem; transition: transform .2s ease; }
+.lk.primary { grid-column: 1 / -1; background: var(--ink); color: var(--paper); }
+@media (hover: hover) {
+  .lk:hover { background: var(--ink); color: var(--paper); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--line); }
+  .lk:hover .ar { transform: translateX(3px); }
+  .lk.primary:hover { box-shadow: 4px 4px 0 var(--line); }
+}
+
+/* Retrato esfumaçado */
+.visual { position: relative; min-height: 0; display: flex; align-items: flex-end; justify-content: center; isolation: isolate; padding-top: 1.5rem; }
+.haze { position: absolute; inset: 0 -10% -8% -30%; z-index: -1; background: radial-gradient(closest-side at 52% 42%, color-mix(in srgb, var(--haze) 100%, transparent) 0%, color-mix(in srgb, var(--haze) 85%, transparent) 20%, color-mix(in srgb, var(--haze) 55%, transparent) 40%, color-mix(in srgb, var(--haze) 28%, transparent) 60%, color-mix(in srgb, var(--haze) 9%, transparent) 80%, color-mix(in srgb, var(--haze) 0%, transparent) 100%); filter: blur(24px); }
+.frame { position: relative; height: 100%; max-height: 40rem; aspect-ratio: 4 / 5; max-width: 100%; }
+.portrait { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
+.veil { position: absolute; left: -4%; right: -4%; bottom: -2px; height: 82%; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 0%, transparent) 0%, color-mix(in srgb, var(--paper) 3%, transparent) 10%, color-mix(in srgb, var(--paper) 9%, transparent) 20%, color-mix(in srgb, var(--paper) 18%, transparent) 30%, color-mix(in srgb, var(--paper) 30%, transparent) 40%, color-mix(in srgb, var(--paper) 45%, transparent) 50%, color-mix(in srgb, var(--paper) 60%, transparent) 58%, color-mix(in srgb, var(--paper) 74%, transparent) 65%, color-mix(in srgb, var(--paper) 87%, transparent) 72%, color-mix(in srgb, var(--paper) 95%, transparent) 78%, color-mix(in srgb, var(--paper) 99%, transparent) 83%, color-mix(in srgb, var(--paper) 100%, transparent) 86%, color-mix(in srgb, var(--paper) 100%, transparent) 100%); }
+.hero-logo { position: absolute; z-index: 2; left: 4%; top: 3%; width: 24%; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.hero-logo:focus:not(:focus-visible) { outline: none; }
+.hero-logo svg { display: block; width: 100%; height: auto; fill: currentColor; overflow: visible; }
+.hero-logo .tail { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.hero-logo .tail-in { animation: tail-in 1.1s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes tail-in { from { transform: translate(110px, 110px); } to { transform: none; } }
+
+/* Computador: retrato e logotipo um pouco mais altos */
+@media (min-width: 861px) {
+  .visual { align-items: center; padding: 1rem 0 9vh; }
+  .frame { height: auto; max-height: min(40rem, 100%); }
+  .portrait { height: auto; max-height: min(40rem, calc(100dvh - var(--hh) - 9vh - 1rem)); }
+}
+/* Celular: foto ocupa o espaço que sobrar */
+@media (max-width: 860px) {
+  .main { display: flex; flex-direction: column; gap: 0; }
+  .visual { order: -1; flex: 1 1 auto; padding-top: .75rem; margin-inline: calc(-1 * var(--gutter)); }
+  .frame { max-height: none; }
+  .haze { inset: 0 -5% 0 -5%; }
+  .copy { flex: none; margin-top: -2.25rem; padding: 0 0 max(1rem, env(safe-area-inset-bottom)); }
+  h1 { font-size: clamp(2.1rem, 10vw, 2.9rem); }
+  .lead { margin-top: .6rem; font-size: 1rem; }
+  .links { margin-top: 1rem; gap: .5rem; max-width: none; }
+  .lk { height: 2.75rem; font-size: .9rem; }
+}
+@media (max-width: 860px) and (max-height: 640px) { .lead { font-size: .92rem; } .lk { height: 2.5rem; } }
+
+/* Janela de contato */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: var(--gutter); background: color-mix(in srgb, var(--ink) 35%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sheet { width: min(100%, 34rem); max-height: 100%; overflow: auto; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); padding: clamp(1.25rem, 4vw, 2rem); box-shadow: 8px 8px 0 var(--ink); animation: up .25s ease both; }
+@keyframes up { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.sheet-head h2 { margin: 0; font: 800 1.6rem/1.1 var(--display); letter-spacing: -.03em; }
+.x { width: 2.25rem; height: 2.25rem; border: 1px solid var(--ink); background: none; color: inherit; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+.cform { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.25rem; }
+.cform .full { grid-column: 1 / -1; }
+.field { display: grid; gap: .4rem; }
+.field label { color: var(--mute); }
+.field input, .field textarea { width: 100%; background: transparent; color: var(--ink); border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: .5rem 0; font: 400 1rem/1.4 var(--body); resize: vertical; }
+.field textarea { border: 1px solid var(--ink); padding: .7rem; }
+.field input:focus { outline: none; box-shadow: 0 2px 0 var(--ink); }
+.field textarea:focus { outline: none; box-shadow: inset 0 0 0 1px var(--ink); }
+.field [aria-invalid="true"] { border-color: #b00020; }
+.send { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.btn { display: inline-flex; align-items: center; height: 3rem; padding: 0 1.3rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font: 500 .95rem/1 var(--body); text-decoration: none; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); }
+.status { color: var(--mute); font-size: .92rem; }
+.ready { border: 1px solid var(--ink); padding: 1rem; }
+.ready .acts { margin-top: .9rem; display: flex; flex-wrap: wrap; gap: .6rem; }
+@media (max-width: 520px) { .cform { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <div class="in">
+      <span class="brand">Querino Neto</span>
+      <button class="icon-btn" type="button" data-invert aria-pressed="false" aria-label="Inverter cores">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+        <span>Inverter</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="copy">
+      <h1>Olá,<br>eu sou Querino!</h1>
+      <p class="lead">Advogado com especialização em Regulação e Governança (UFAL) e Argumentação e Justiça (UFRGS)</p>
+      <p class="oab mono">OAB/AL nº 20.662</p>
+      <nav class="links" aria-label="Contato e redes sociais">
+        <button class="lk primary" type="button" id="openForm">Enviar mensagem <span class="ar" aria-hidden="true">→</span></button>
+        <a class="lk" href="https://wa.me/5582987036738" target="_blank" rel="noopener">WhatsApp <span class="ar" aria-hidden="true">↗</span></a>
+        <a class="lk" hidden data-todo="instagram" href="https://www.instagram.com/__INSTAGRAM__/" target="_blank" rel="noopener">Instagram <span class="ar" aria-hidden="true">↗</span></a>
+        <a class="lk" hidden data-todo="linkedin" href="https://www.linkedin.com/in/__LINKEDIN__/" target="_blank" rel="noopener">LinkedIn <span class="ar" aria-hidden="true">↗</span></a>
+        <button class="lk" type="button" id="copyMail" title="contato@querinoneto.com.br">E-mail <span class="ar" id="mailAr" aria-hidden="true">⧉</span></button>
+      </nav>
+      <p class="status" id="mstatus" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="visual">
+      <div class="haze" aria-hidden="true"></div>
+      <div class="frame">
+        <img class="portrait" src="assets/retrato.webp" alt="Retrato de José Querino de Macêdo Neto" width="1000" height="1250">
+        <div class="veil" aria-hidden="true"></div>
+        <button class="hero-logo" type="button" data-invert aria-pressed="false" aria-label="Inverter cores" title="Inverter cores">
+          <svg viewBox="240 185 1350 1610" role="img" aria-label="Logotipo: letra Q em blocos">
+            <path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/>
+            <g class="tail"><g class="tail-in"><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></g></g>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+    <div class="sheet-head"><h2 id="mtitle">Fale comigo</h2><button class="x" type="button" id="closeForm" aria-label="Fechar">×</button></div>
+    <form class="cform" id="cform" novalidate>
+      <div class="field"><label for="f-nome" class="mono">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-tel" class="mono">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(82) 90000-0000"></div>
+      <div class="field full"><label for="f-email" class="mono">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field full"><label for="f-msg" class="mono">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" required></textarea></div>
+      <div class="field full send"><button class="btn" type="submit">Enviar mensagem</button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
+      <div class="ready full" id="ready" hidden>
+        <p>Sua mensagem está pronta. Abra no seu e-mail para enviar, ou copie o texto e mande para contato@querinoneto.com.br.</p>
+        <div class="acts"><a class="btn" id="mailgo" href="mailto:contato@querinoneto.com.br">Abrir no e-mail</a><button class="btn ghost" type="button" id="copymsg">Copiar mensagem</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var invBtns = [].slice.call(document.querySelectorAll('[data-invert]'));
+  function setInv(on) {
+    if (on) root.setAttribute('data-inv', ''); else root.removeAttribute('data-inv');
+    invBtns.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+  }
+  setInv(false);
+  invBtns.forEach(function (b) { b.addEventListener('click', function () { setInv(!root.hasAttribute('data-inv')); }); });
+
+  var visual = document.querySelector('.visual'), tail = document.querySelector('.hero-logo .tail');
+  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('pointermove', function (e) {
+      var px = e.clientX / window.innerWidth - .5, py = e.clientY / window.innerHeight - .5;
+      tail.style.setProperty('--tx', (px * 80).toFixed(1) + 'px');
+      tail.style.setProperty('--ty', (py * 80).toFixed(1) + 'px');
+    });
+  }
+
+  function copy(text, cb) {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { cb(true); }, function () { cb(false); });
+    else cb(false);
+  }
+  var ms = document.getElementById('mstatus');
+  document.getElementById('copyMail').addEventListener('click', function () {
+    copy('contato@querinoneto.com.br', function (ok) {
+      ms.textContent = ok ? 'E-mail copiado: contato@querinoneto.com.br' : 'E-mail: contato@querinoneto.com.br';
+      setTimeout(function () { ms.textContent = ''; }, 4000);
+    });
+  });
+
+  var modal = document.getElementById('modal'), opener = document.getElementById('openForm');
+  function openM() { modal.hidden = false; setTimeout(function () { document.getElementById('f-nome').focus(); }, 30); }
+  function closeM() { modal.hidden = true; opener.focus(); }
+  opener.addEventListener('click', openM);
+  document.getElementById('closeForm').addEventListener('click', closeM);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeM(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeM(); });
+
+  var cf = document.getElementById('cform'), fst = document.getElementById('fstatus'), ready = document.getElementById('ready'), composed = '';
+  cf.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nome = cf.nome, tel = cf.telefone, mail = cf.email, msg = cf.mensagem, bad = null;
+    [nome, mail, msg].forEach(function (f) { f.removeAttribute('aria-invalid'); });
+    if (!nome.value.trim()) bad = nome;
+    else if (!/^\S+@\S+\.\S+$/.test(mail.value.trim())) bad = mail;
+    else if (!msg.value.trim()) bad = msg;
+    if (bad) { bad.setAttribute('aria-invalid', 'true'); bad.focus(); fst.textContent = bad === mail ? 'Informe um e-mail válido.' : 'Preencha nome, e-mail e mensagem.'; return; }
+    fst.textContent = '';
+    composed = 'Nome: ' + nome.value.trim() + '\nTelefone: ' + (tel.value.trim() || 'não informado') + '\nE-mail: ' + mail.value.trim() + '\n\n' + msg.value.trim();
+    document.getElementById('mailgo').href = 'mailto:contato@querinoneto.com.br?subject=' + encodeURIComponent('Contato pelo site: ' + nome.value.trim()) + '&body=' + encodeURIComponent(composed);
+    ready.hidden = false;
+  });
+  document.getElementById('copymsg').addEventListener('click', function () {
+    copy('Para: contato@querinoneto.com.br\n\n' + composed, function (ok) { fst.textContent = ok ? 'Mensagem copiada.' : 'Não foi possível copiar.'; });
+  });
+})();
+</script>
+</body>
+</html>
