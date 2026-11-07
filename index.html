@@ -124,6 +124,9 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 .btn.ghost { background: transparent; color: var(--ink); }
 .status { color: var(--mute); font-size: .92rem; }
 .ready { border: 1px solid var(--ink); padding: 1rem; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.note { margin: 0; color: var(--mute); font-size: .85rem; }
+.btn[disabled] { opacity: .6; cursor: progress; }
 .ready .acts { margin-top: .9rem; display: flex; flex-wrap: wrap; gap: .6rem; }
 @media (max-width: 520px) { .cform { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -182,10 +185,15 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
       <div class="field"><label for="f-tel" class="mono">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(82) 90000-0000"></div>
       <div class="field full"><label for="f-email" class="mono">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
       <div class="field full"><label for="f-msg" class="mono">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" required></textarea></div>
-      <div class="field full send"><button class="btn" type="submit">Enviar mensagem</button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="full note">Seus dados serão usados apenas para responder a esta mensagem.</p>
+      <div class="field full send"><button class="btn" type="submit" id="sendBtn">Enviar mensagem</button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
       <div class="ready full" id="ready" hidden>
-        <p>Sua mensagem está pronta. Abra no seu e-mail para enviar, ou copie o texto e mande para contato@querinoneto.com.br.</p>
+        <p>Não foi possível enviar pelo site agora. Abra a mensagem no seu e-mail para enviar, ou copie o texto e mande para contato@querinoneto.com.br.</p>
         <div class="acts"><a class="btn" id="mailgo" href="mailto:contato@querinoneto.com.br">Abrir no e-mail</a><button class="btn ghost" type="button" id="copymsg">Copiar mensagem</button></div>
+      </div>
+      <div class="ready full" id="sent" hidden tabindex="-1">
+        <p><strong>Mensagem enviada.</strong> Obrigado pelo contato! Responderei pelo e-mail informado.</p>
       </div>
     </form>
   </div>
@@ -193,6 +201,9 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 
 <script>
 (function () {
+  // Chave pública do Web3Forms (web3forms.com), que encaminha o formulário para contato@querinoneto.com.br.
+  // Enquanto estiver vazia, o formulário oferece abrir a mensagem no e-mail do visitante.
+  var WEB3FORMS_KEY = '';
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -226,7 +237,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   });
 
   var modal = document.getElementById('modal'), opener = document.getElementById('openForm');
-  function openM() { modal.hidden = false; setTimeout(function () { document.getElementById('f-nome').focus(); }, 30); }
+  function openM() { modal.hidden = false; document.getElementById('sent').hidden = true; setTimeout(function () { document.getElementById('f-nome').focus(); }, 30); }
   function closeM() { modal.hidden = true; opener.focus(); }
   opener.addEventListener('click', openM);
   document.getElementById('closeForm').addEventListener('click', closeM);
@@ -243,9 +254,32 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
     else if (!msg.value.trim()) bad = msg;
     if (bad) { bad.setAttribute('aria-invalid', 'true'); bad.focus(); fst.textContent = bad === mail ? 'Informe um e-mail válido.' : 'Preencha nome, e-mail e mensagem.'; return; }
     fst.textContent = '';
+    ready.hidden = true;
     composed = 'Nome: ' + nome.value.trim() + '\nTelefone: ' + (tel.value.trim() || 'não informado') + '\nE-mail: ' + mail.value.trim() + '\n\n' + msg.value.trim();
     document.getElementById('mailgo').href = 'mailto:contato@querinoneto.com.br?subject=' + encodeURIComponent('Contato pelo site: ' + nome.value.trim()) + '&body=' + encodeURIComponent(composed);
-    ready.hidden = false;
+    if (cf.botcheck.checked) return;
+    var btn = document.getElementById('sendBtn');
+    btn.disabled = true; fst.textContent = 'Enviando…';
+    function falhou() { btn.disabled = false; fst.textContent = ''; ready.hidden = false; }
+    if (!WEB3FORMS_KEY) { falhou(); return; }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: 'Contato pelo site: ' + nome.value.trim(),
+        from_name: 'Site querinoneto.com.br',
+        name: nome.value.trim(),
+        email: mail.value.trim(),
+        telefone: tel.value.trim() || 'não informado',
+        message: msg.value.trim()
+      })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d || !d.success) throw new Error('falha');
+      btn.disabled = false; fst.textContent = '';
+      cf.reset();
+      var sent = document.getElementById('sent'); sent.hidden = false; sent.focus();
+    }).catch(falhou);
   });
   document.getElementById('copymsg').addEventListener('click', function () {
     copy('Para: contato@querinoneto.com.br\n\n' + composed, function (ok) { fst.textContent = ok ? 'Mensagem copiada.' : 'Não foi possível copiar.'; });
