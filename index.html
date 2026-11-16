@@ -113,10 +113,11 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 .frame { position: relative; height: 100%; max-height: 40rem; aspect-ratio: 4 / 5; max-width: 100%; }
 .portrait { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
 .veil { position: absolute; left: -4%; right: -4%; bottom: -2px; height: 82%; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 0%, transparent) 0%, color-mix(in srgb, var(--paper) 3%, transparent) 10%, color-mix(in srgb, var(--paper) 9%, transparent) 20%, color-mix(in srgb, var(--paper) 18%, transparent) 30%, color-mix(in srgb, var(--paper) 30%, transparent) 40%, color-mix(in srgb, var(--paper) 45%, transparent) 50%, color-mix(in srgb, var(--paper) 60%, transparent) 58%, color-mix(in srgb, var(--paper) 74%, transparent) 65%, color-mix(in srgb, var(--paper) 87%, transparent) 72%, color-mix(in srgb, var(--paper) 95%, transparent) 78%, color-mix(in srgb, var(--paper) 99%, transparent) 83%, color-mix(in srgb, var(--paper) 100%, transparent) 86%, color-mix(in srgb, var(--paper) 100%, transparent) 100%); }
-.hero-logo { position: absolute; z-index: 2; left: 4%; top: 3%; width: 24%; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.hero-logo { position: absolute; z-index: 2; left: 4%; top: 3%; width: 24%; background: none; border: 0; padding: 0; color: var(--ink); cursor: grab; touch-action: none; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+.hero-logo.dragging { cursor: grabbing; }
 .hero-logo:focus:not(:focus-visible) { outline: none; }
 .hero-logo svg { display: block; width: 100%; height: auto; fill: currentColor; overflow: visible; }
-.hero-logo .tail { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.hero-logo .tail { transform: translate(var(--tx, 0px), var(--ty, 0px)); will-change: transform; }
 .hero-logo .tail-in { animation: tail-in 1.1s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes tail-in { from { transform: translate(110px, 110px); } to { transform: none; } }
 
@@ -214,7 +215,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
       <div class="frame">
         <img class="portrait" data-i18n-alt="alt" src="assets/retrato.webp" alt="Retrato de José Querino de Macêdo Neto" width="1000" height="1250">
         <div class="veil" aria-hidden="true"></div>
-        <button class="hero-logo" type="button" data-invert aria-pressed="false" data-i18n-aria="invert" data-i18n-title="invert" aria-label="Inverter cores" title="Inverter cores">
+        <button class="hero-logo" type="button" data-i18n-aria="logoPlay" data-i18n-title="logoPlay" aria-label="Logotipo Q: toque ou arraste a perna do Q" title="Toque ou arraste a perna do Q">
           <svg viewBox="240 185 1350 1610" role="img" data-i18n-aria="logo" aria-label="Logotipo: letra Q em blocos">
             <path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/>
             <g class="tail"><g class="tail-in"><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></g></g>
@@ -263,7 +264,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
       h1: 'Olá,<br>eu sou Querino!',
       lead: 'Advogado com especialização em Regulação e Governança (UFAL), Argumentação e Justiça (UFRGS), Turismo e Desenvolvimento (UNIRIO) e Cultura Popular Brasileira (URCA).',
       links: 'Contato e redes sociais', open: 'Enviar mensagem', copyMail: 'Copiar e-mail: MAIL', x: 'X (antigo Twitter)',
-      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q em blocos',
+      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q em blocos', logoPlay: 'Logotipo Q: toque ou arraste a perna do Q',
       mtitle: 'Fale comigo', close: 'Fechar', name: 'Nome', phone: 'Telefone', phonePh: '(82) 90000-0000', email: 'E-mail', msg: 'Mensagem',
       note: 'Seus dados serão usados apenas para responder a esta mensagem.', submit: 'Enviar mensagem', sending: 'Enviando…',
       fail: 'Não foi possível enviar pelo site agora. Abra a mensagem no seu e-mail para enviar, ou copie o texto e mande para MAIL.',
@@ -278,7 +279,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
       h1: 'Hi,<br>I’m Querino!',
       lead: 'Lawyer with specializations in Regulation and Governance (UFAL), Argumentation and Justice (UFRGS), Tourism and Development (UNIRIO) and Brazilian Popular Culture (URCA).',
       links: 'Contact and social media', open: 'Send a message', copyMail: 'Copy email: MAIL', x: 'X (formerly Twitter)',
-      alt: 'Portrait of José Querino de Macêdo Neto', logo: 'Logo: block letter Q',
+      alt: 'Portrait of José Querino de Macêdo Neto', logo: 'Logo: block letter Q', logoPlay: 'Q logo: tap or drag the tail of the Q',
       mtitle: 'Get in touch', close: 'Close', name: 'Name', phone: 'Phone', phonePh: 'Optional', email: 'Email', msg: 'Message',
       note: 'Your details will only be used to reply to this message.', submit: 'Send message', sending: 'Sending…',
       fail: 'The message couldn’t be sent through the site right now. Open it in your email app to send it, or copy the text and send it to MAIL.',
@@ -293,7 +294,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
       h1: '¡Hola,<br>soy Querino!',
       lead: 'Abogado con especialización en Regulación y Gobernanza (UFAL), Argumentación y Justicia (UFRGS), Turismo y Desarrollo (UNIRIO) y Cultura Popular Brasileña (URCA).',
       links: 'Contacto y redes sociales', open: 'Enviar mensaje', copyMail: 'Copiar correo: MAIL', x: 'X (antes Twitter)',
-      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q en bloques',
+      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q en bloques', logoPlay: 'Logotipo Q: toque o arrastre la pierna de la Q',
       mtitle: 'Hablemos', close: 'Cerrar', name: 'Nombre', phone: 'Teléfono', phonePh: 'Opcional', email: 'Correo electrónico', msg: 'Mensaje',
       note: 'Sus datos se usarán solo para responder a este mensaje.', submit: 'Enviar mensaje', sending: 'Enviando…',
       fail: 'No fue posible enviarlo desde el sitio en este momento. Abra el mensaje en su correo para enviarlo, o copie el texto y envíelo a MAIL.',
@@ -362,12 +363,67 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   }
   invBtns.forEach(function (b) { b.addEventListener('click', toggleInv); });
 
-  var visual = document.querySelector('.visual'), tail = document.querySelector('.hero-logo .tail');
+  // Logotipo interativo: a perna do Q pode ser arrastada e volta com efeito de mola; um toque dá um "chute".
+  var logo = document.querySelector('.hero-logo'), tail = logo.querySelector('.tail'), logoSvg = logo.querySelector('svg');
+  var pos = { x: 0, y: 0 }, vel = { x: 0, y: 0 }, aim = { x: 0, y: 0 }, drag = null, raf = 0, last = 0;
+  var MAXR = 520;                       // alcance máximo do arrasto, em unidades do desenho
+  function units() { return 1350 / (logoSvg.getBoundingClientRect().width || 1); }
+  function paint() {
+    tail.style.setProperty('--tx', pos.x.toFixed(1) + 'px');
+    tail.style.setProperty('--ty', pos.y.toFixed(1) + 'px');
+  }
+  function step(t) {
+    var dt = Math.min(.032, (t - (last || t)) / 1000 || .016); last = t;
+    if (!drag) {
+      var k = 170, c = 11;              // rigidez e amortecimento da mola
+      vel.x += (-(pos.x - aim.x) * k - vel.x * c) * dt;
+      vel.y += (-(pos.y - aim.y) * k - vel.y * c) * dt;
+      pos.x += vel.x * dt; pos.y += vel.y * dt;
+    }
+    paint();
+    var still = !drag && Math.abs(pos.x - aim.x) < .3 && Math.abs(pos.y - aim.y) < .3 && Math.abs(vel.x) < 3 && Math.abs(vel.y) < 3;
+    if (still) { pos.x = aim.x; pos.y = aim.y; paint(); raf = 0; last = 0; return; }
+    raf = requestAnimationFrame(step);
+  }
+  function wake() { if (!raf) raf = requestAnimationFrame(step); }
+  function kick() {
+    if (reduce) { pos.x = aim.x + 60; pos.y = aim.y + 60; paint(); setTimeout(function () { pos.x = aim.x; pos.y = aim.y; paint(); }, 250); return; }
+    vel.x += 4200; vel.y += 4200; wake();
+  }
+  logo.addEventListener('pointerdown', function (e) {
+    if (e.button && e.button !== 0) return;
+    drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: pos.x, oy: pos.y, moved: false, u: units(), hist: [] };
+    try { logo.setPointerCapture(e.pointerId); } catch (err) {}
+    logo.classList.add('dragging');
+    vel.x = vel.y = 0;
+  });
+  logo.addEventListener('pointermove', function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = (e.clientX - drag.sx) * drag.u, dy = (e.clientY - drag.sy) * drag.u;
+    if (Math.abs(e.clientX - drag.sx) + Math.abs(e.clientY - drag.sy) > 4) drag.moved = true;
+    var x = drag.ox + dx, y = drag.oy + dy, r = Math.sqrt(x * x + y * y);
+    if (r > MAXR) { var f = MAXR + (r - MAXR) * .15; x *= f / r; y *= f / r; }   // resistência elástica no limite
+    pos.x = x; pos.y = y;
+    drag.hist.push({ x: x, y: y, t: performance.now() }); if (drag.hist.length > 5) drag.hist.shift();
+    wake();
+  });
+  function release(e) {
+    if (!drag || (e && e.pointerId !== drag.id)) return;
+    var h = drag.hist, moved = drag.moved;
+    if (h.length > 1) { var a = h[0], b = h[h.length - 1], dt = (b.t - a.t) / 1000 || .016; vel.x = (b.x - a.x) / dt; vel.y = (b.y - a.y) / dt; }
+    drag = null; logo.classList.remove('dragging');
+    if (!moved) kick(); else wake();
+  }
+  logo.addEventListener('pointerup', release);
+  logo.addEventListener('pointercancel', release);
+  logo.addEventListener('click', function (e) { if (e.detail === 0) kick(); });   // teclado (Enter/Espaço)
+  // No computador, a perna continua seguindo o mouse de leve
   if (!reduce && window.matchMedia('(pointer: fine)').matches) {
     document.addEventListener('pointermove', function (e) {
-      var px = e.clientX / window.innerWidth - .5, py = e.clientY / window.innerHeight - .5;
-      tail.style.setProperty('--tx', (px * 80).toFixed(1) + 'px');
-      tail.style.setProperty('--ty', (py * 80).toFixed(1) + 'px');
+      if (drag) return;
+      aim.x = (e.clientX / window.innerWidth - .5) * 80;
+      aim.y = (e.clientY / window.innerHeight - .5) * 80;
+      wake();
     });
   }
 
