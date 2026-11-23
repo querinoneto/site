@@ -115,9 +115,10 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 .veil { position: absolute; left: -4%; right: -4%; bottom: -2px; height: 82%; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 0%, transparent) 0%, color-mix(in srgb, var(--paper) 3%, transparent) 10%, color-mix(in srgb, var(--paper) 9%, transparent) 20%, color-mix(in srgb, var(--paper) 18%, transparent) 30%, color-mix(in srgb, var(--paper) 30%, transparent) 40%, color-mix(in srgb, var(--paper) 45%, transparent) 50%, color-mix(in srgb, var(--paper) 60%, transparent) 58%, color-mix(in srgb, var(--paper) 74%, transparent) 65%, color-mix(in srgb, var(--paper) 87%, transparent) 72%, color-mix(in srgb, var(--paper) 95%, transparent) 78%, color-mix(in srgb, var(--paper) 99%, transparent) 83%, color-mix(in srgb, var(--paper) 100%, transparent) 86%, color-mix(in srgb, var(--paper) 100%, transparent) 100%); }
 .hero-logo { position: absolute; z-index: 2; left: 4%; top: 3%; width: 24%; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; touch-action: pan-y; perspective: 700px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
 .hero-logo.dragging { cursor: grabbing; }
-.coin { position: relative; display: block; transform-style: preserve-3d; transform: rotateY(var(--ry, 0deg)); will-change: transform; }
-.coin .face { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-.coin .back { position: absolute; inset: 0; transform: rotateY(180deg); }
+/* Em repouso o Q não tem transformação 3D; ela só existe enquanto gira */
+.coin { display: block; }
+.coin.spinning { transform: rotateY(var(--ry, 0deg)); }
+.coin.spinning.flip svg { transform: scaleX(-1); }
 .hero-logo:focus:not(:focus-visible) { outline: none; }
 .hero-logo svg { display: block; width: 100%; height: auto; fill: currentColor; overflow: visible; }
 .hero-logo .tail { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
@@ -220,13 +221,9 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
         <div class="veil" aria-hidden="true"></div>
         <button class="hero-logo" type="button" data-i18n-aria="logoPlay" data-i18n-title="logoPlay" aria-label="Logotipo Q: toque ou deslize para girar" title="Toque ou deslize para girar">
           <span class="coin">
-            <svg class="face front" viewBox="240 185 1350 1610" role="img" data-i18n-aria="logo" aria-label="Logotipo: letra Q em blocos">
+            <svg viewBox="240 185 1350 1610" role="img" data-i18n-aria="logo" aria-label="Logotipo: letra Q em blocos">
               <path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/>
               <g class="tail"><g class="tail-in"><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></g></g>
-            </svg>
-            <svg class="face back" viewBox="240 185 1350 1610" aria-hidden="true">
-              <path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/>
-              <path d="M771 1225H1071L1582 1785H1276L767 1230Z"/>
             </svg>
           </span>
         </button>
@@ -375,7 +372,15 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   // Logotipo interativo: o Q gira como uma moeda. Um toque dá um giro; deslizar para os lados gira com impulso.
   var logo = document.querySelector('.hero-logo'), coin = logo.querySelector('.coin'), tail = logo.querySelector('.tail');
   var ang = 0, w = 0, drag = null, raf = 0, last = 0;
-  function paint() { coin.style.setProperty('--ry', ang.toFixed(2) + 'deg'); }
+  function paint() {
+    var m = ((ang % 360) + 360) % 360;
+    if (m === 0 && !w && !drag) {                         // em repouso: sem nenhuma transformação
+      coin.classList.remove('spinning', 'flip'); coin.style.removeProperty('--ry'); return;
+    }
+    coin.classList.add('spinning');
+    coin.classList.toggle('flip', m > 90 && m < 270);     // na metade de trás, desvira o desenho para o Q continuar legível
+    coin.style.setProperty('--ry', ang.toFixed(2) + 'deg');
+  }
   function step(t) {
     var dt = Math.min(.032, (t - (last || t)) / 1000 || .016); last = t;
     if (!drag) {
@@ -387,7 +392,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
         w += (-(ang - target) * 90 - w * 9) * dt;
         ang += w * dt;
         if (Math.abs(ang - target) < .2 && Math.abs(w) < 2) {
-          ang = ((target % 360) + 360) % 360; w = 0; paint(); raf = 0; last = 0; return;
+          ang = 0; w = 0; paint(); raf = 0; last = 0; return;   // as duas faces são iguais: volta ao estado inicial
         }
       }
     }
@@ -396,7 +401,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   }
   function wake() { if (!raf) raf = requestAnimationFrame(step); }
   function spin(dir) {
-    if (reduce) { ang = (ang + 180) % 360; paint(); return; }
+    if (reduce) { ang = 0; w = 0; paint(); return; }
     var d = dir || (w < 0 ? -1 : 1);
     w = d * Math.max(Math.abs(w), 0) + d * 1500;
     if (Math.abs(w) > 4200) w = d * 4200;
@@ -426,7 +431,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
     if (!d.moved) { spin(); return; }
     var h = d.hist;
     if (h.length > 1) { var a = h[0], b = h[h.length - 1], dt = (b.t - a.t) / 1000 || .016; w = Math.max(-4200, Math.min(4200, (b.a - a.a) / dt)); }
-    if (reduce) { ang = Math.round(ang / 180) * 180; w = 0; paint(); return; }
+    if (reduce) { ang = 0; w = 0; paint(); return; }
     wake();
   }
   logo.addEventListener('pointerup', release);
