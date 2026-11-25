@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://querinoneto.com.br/sitemap.xml
