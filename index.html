@@ -254,18 +254,8 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 :root[data-inv] .visual img { filter: brightness(.9); }
 /* Em repouso o Q não tem transformação 3D; ela só existe enquanto gira */
 
-/* Computador: texto à esquerda e a foto inteira, na horizontal, à direita */
-@media (min-width: 861px) {
-  .main { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
-  .copy { padding: 0; }
-  h1 { font-size: clamp(2.4rem, 4.4vw, 4.2rem); }
-  .visual { aspect-ratio: 1600 / 871; width: 100%; height: auto; max-height: calc(100dvh - var(--hh) - 3rem); }
-}
 /* Celular: foto ocupa o espaço que sobrar */
 @media (max-width: 860px) {
-  .main { display: flex; flex-direction: column; gap: 0; }
-  .visual { order: -1; flex: none; aspect-ratio: 1600 / 871; margin-inline: calc(-1 * var(--gutter)); }
-  .copy { flex: none; padding: 1.25rem 0 max(1.25rem, env(safe-area-inset-bottom)); }
   h1 { font-size: clamp(2.1rem, 10vw, 2.9rem); }
   :root { --gutter: 1rem; }
   .lead { margin-top: .6rem; font-size: clamp(.7rem, 3.2vw, 1rem); line-height: 1.4; letter-spacing: -.01em; }
@@ -301,6 +291,39 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 .ready .acts { margin-top: .9rem; display: flex; flex-wrap: wrap; gap: .6rem; }
 @media (max-width: 520px) { .cform { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Moldura em cartão (estrutura inspirada em jordao.com.br): cartão com cantos arredondados,
+   borda fina e sombra suave; foto inteira no topo da coluna esquerda; linha dividindo as colunas */
+:root { --page: #f3f3f1; }
+:root[data-inv] { --page: #1a1a1a; }
+body { background: var(--page); }
+.page { height: auto; min-height: 100dvh; overflow: visible; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; justify-items: center; padding: clamp(1rem, 3vh, 2rem) var(--gutter); }
+.card { width: 100%; max-width: 1100px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); background: var(--paper); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px -30px rgba(21, 21, 21, .28); }
+:root[data-inv] .card { box-shadow: 0 20px 50px -30px rgba(0, 0, 0, .7); }
+.id { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+.visual { order: 0; aspect-ratio: 1600 / 871; width: 100%; height: auto; max-height: none; margin: 0; }
+.idb { flex: 1; display: flex; align-items: center; padding: clamp(1.25rem, 3vh, 1.75rem) clamp(1.5rem, 3vw, 2.25rem); }
+.idb h1 { font-size: clamp(2.1rem, 3.5vw, 3.3rem); }
+.copy { align-self: center; padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 3.5vw, 2.75rem); }
+.copy .lead { margin-top: 0; font-size: clamp(1rem, 1.45vw, 1.15rem); }
+.copy .links { max-width: none; }
+@media (max-width: 860px) {
+  .main { align-content: start; padding: .75rem var(--gutter) 1rem; }
+  .card { grid-template-columns: minmax(0, 1fr); }
+  .id { border-right: 0; border-bottom: 1px solid var(--line); }
+  .idb { padding: 1.1rem 1.25rem 1.2rem; }
+  .idb h1 { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .copy { padding: 1.1rem 1.25rem 1.25rem; }
+  .copy .lead { font-size: clamp(.7rem, 3.2vw, 1rem); }
+}
+@media (max-width: 420px) {
+  .main { padding: 0; }
+  .card { border-radius: 20px 20px 0 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; min-height: calc(100dvh - var(--hh) - .5rem); align-content: start; }
+  .main { padding-top: .5rem; }
+  .idb { padding: 1rem var(--gutter) 1.1rem; }
+  .copy { padding: 1rem var(--gutter) max(1.25rem, env(safe-area-inset-bottom)); }
+}
 </style>
 </head>
 <body>
@@ -325,8 +348,16 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   </header>
 
   <main class="main">
-    <div class="copy">
-      <h1 data-i18n-html="h1">Olá,<br>eu sou Querino!</h1>
+    <div class="card">
+      <div class="id">
+        <div class="visual">
+        <picture><source srcset="assets/foto.webp" type="image/webp"><img data-i18n-alt="alt" src="assets/foto.jpg" alt="Retrato de José Querino de Macêdo Neto" width="1600" height="871"></picture>
+        </div>
+        <div class="idb">
+        <h1 data-i18n-html="h1">Olá,<br>eu sou Querino!</h1>
+        </div>
+      </div>
+      <div class="copy">
       <p class="lead" data-i18n="lead">Advogado com especialização em Regulação e Governança (UFAL), Argumentação e Justiça (UFRGS), Turismo e Desenvolvimento (UNIRIO) e Cultura Popular Brasileira (URCA).</p>
       <p class="oab mono">OAB/AL nº 20.662</p>
       <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
@@ -340,10 +371,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
         </div>
       </nav>
       <p class="status" id="mstatus" role="status" aria-live="polite"></p>
-    </div>
-
-    <div class="visual">
-      <picture><source srcset="assets/foto.webp" type="image/webp"><img data-i18n-alt="alt" src="assets/foto.jpg" alt="Retrato de José Querino de Macêdo Neto" width="1600" height="871"></picture>
+      </div>
     </div>
   </main>
 </div>
