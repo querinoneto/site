@@ -194,7 +194,7 @@
 <meta name="twitter:image" content="https://querinoneto.com.br/assets/compartilhar.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
 <style>
 /* Plano: cartão de visita de uma tela só, branco e preto do logotipo.
    Layout: retrato esfumaçado + saudação + links, tudo visível sem rolar. */
@@ -419,6 +419,11 @@ h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); lette
   .creds p { white-space: nowrap; }
   .copy .links { margin-top: 1.3rem; }
 }
+
+/* Títulos: primeira palavra em negrito vertical, segunda em itálico */
+h1.name b, .sheet-head h2 b { font-style: normal; font-weight: 700; }
+/* Separador discreto entre cargo e instituição */
+.creds .dot { display: inline-block; margin: 0 .1em; white-space: pre; color: color-mix(in srgb, var(--mute) 70%, transparent); font-weight: 700; transform: translateY(-.02em); }
 </style>
 </head>
 <body>
@@ -431,15 +436,15 @@ h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); lette
         <picture><source srcset="assets/foto.webp" type="image/webp"><img data-i18n-alt="alt" src="assets/foto.jpg" alt="Retrato de José Querino de Macêdo Neto" width="1600" height="871"></picture>
         </div>
         <div class="idb">
-        <h1 class="name">Querino Neto</h1>
+        <h1 class="name"><b>Querino</b> Neto</h1>
         </div>
       </div>
       <div class="copy">
       <div class="creds">
-        <p><b data-i18n="r1">Presidente</b> • <span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
-        <p><b data-i18n="r2">Secretário Executivo</b> • <span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
-        <p><b data-i18n="r3">Advogado</b> • <span data-i18n="o3">OAB/AL nº 20.662</span></p>
-        <p><b data-i18n="r4">Pesquisador</b> • <span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
+        <p><b data-i18n="r3">Advogado</b><span class="dot"> · </span><span data-i18n="o3">OAB/AL nº 20.662</span></p>
+        <p><b data-i18n="r1">Presidente</b><span class="dot"> · </span><span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
+        <p><b data-i18n="r4">Pesquisador</b><span class="dot"> · </span><span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
+        <p><b data-i18n="r2">Secretário Executivo</b><span class="dot"> · </span><span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
       </div>
       <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
         <button class="lk primary" type="button" id="openForm"><span data-i18n="open">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button>
@@ -459,7 +464,7 @@ h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); lette
 
 <div class="modal" id="modal" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mtitle">
-    <div class="sheet-head"><h2 id="mtitle" data-i18n="mtitle">Fale comigo</h2><button class="x" type="button" id="closeForm" data-i18n-aria="close" aria-label="Fechar"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></button></div>
+    <div class="sheet-head"><h2 id="mtitle"><b>Fale</b> comigo</h2><button class="x" type="button" id="closeForm" data-i18n-aria="close" aria-label="Fechar"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></button></div>
     <form class="cform" id="cform" novalidate>
       <div class="field"><label for="f-nome" class="mono" data-i18n="name">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required></div>
       <div class="field"><label for="f-tel" class="mono" data-i18n="phone">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" data-i18n-ph="phonePh" placeholder="(82) 90000-0000"></div>
