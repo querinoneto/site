@@ -173,7 +173,7 @@
 <meta name="twitter:image" content="https://querinoneto.com.br/assets/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Plano: cartão de visita de uma tela só, branco e preto do logotipo.
    Layout: retrato esfumaçado + saudação + links, tudo visível sem rolar. */
@@ -320,20 +320,24 @@ body { background: var(--page); }
 /* Celular: sem nome no topo; idioma e inverter cores centralizados acima da foto */
 @media (max-width: 860px) {
   .bar { height: auto; border-bottom: 0; }
-  .bar .in { justify-content: center; padding: .75rem var(--gutter) .5rem; }
+  .bar .in { justify-content: flex-end; padding: .75rem var(--gutter) .5rem; }
+  .bar .icon-btn { width: 1.9rem; height: 1.9rem; }
+  .bar .icon-btn svg { width: .8rem; height: .8rem; }
+  .bar .lang-btn { font-size: .6rem; }
+  .tools { gap: .35rem; }
   .brand { display: none; }
   .page { justify-content: center; }
   .main { flex: none; }
 }
 @media (max-width: 420px) {
   .main { padding: 0 .75rem .75rem; }
+  .bar .in { padding-inline: .75rem; }
   .idb { padding: .9rem 1.1rem 1rem; }
   .copy { padding: 1rem 1.1rem 1.15rem; }
 }
 
 /* Texto no formato combinado: nome em serifa e cargos um por linha */
-h1.name { font: 400 clamp(2.2rem, 3.6vw, 3.2rem)/1 "Newsreader", Georgia, serif; letter-spacing: -.02em; white-space: nowrap; }
-h1.name em { font-style: italic; }
+h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacing: -.04em; white-space: nowrap; }
 .creds { display: grid; gap: .45rem; font-size: clamp(.92rem, 1.2vw, 1.02rem); line-height: 1.45; color: var(--mute); }
 .creds b { color: var(--ink); font-weight: 600; }
 @media (max-width: 860px) {
@@ -370,7 +374,7 @@ h1.name em { font-style: italic; }
         <picture><source srcset="assets/foto.webp" type="image/webp"><img data-i18n-alt="alt" src="assets/foto.jpg" alt="Retrato de José Querino de Macêdo Neto" width="1600" height="871"></picture>
         </div>
         <div class="idb">
-        <h1 class="name">Querino <em>Neto</em></h1>
+        <h1 class="name">Querino Neto</h1>
         </div>
       </div>
       <div class="copy">
