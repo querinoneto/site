@@ -216,18 +216,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 /* Faixa da foto */
 .band { position: relative; aspect-ratio: 20 / 7; overflow: hidden; background: var(--band); }
 .band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; }
-.band::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 34%; background: linear-gradient(to right, rgba(0,0,0,.28), transparent); pointer-events: none; }
-.qlogo { position: absolute; z-index: 2; left: 24px; top: 20px; width: 30px; padding: 0; border: 0; background: none; color: #fff; filter: drop-shadow(0 1px 6px rgba(0,0,0,.35)); cursor: pointer; perspective: 500px; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
-.qlogo svg { display: block; width: 100%; height: auto; fill: currentColor; }
-.coin { display: block; }
-.coin.spinning { transform: rotateY(var(--ry, 0deg)); }
-.coin.spinning.flip svg { transform: scaleX(-1); }
-.idb { flex: 1; padding: 24px 36px 30px; display: grid; gap: 16px; grid-template-rows: auto auto auto 1fr; }
-.eyebrow { margin: 0 0 4px; font-size: 10.88px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--gold); }
+.idb { flex: 1; padding: 24px 36px 30px; display: grid; gap: 16px; grid-template-rows: auto auto 1fr; }
 h1 { font: 400 30.4px/1 var(--display); letter-spacing: -.015em; color: var(--ink); }
 h1 em { color: var(--navy); }
 .bio { font-size: 15.2px; color: var(--ink); }
-.creds { display: grid; gap: 3px; font-size: 13.12px; color: var(--muted); }
+.creds { display: grid; gap: 4px; font-size: 13.12px; line-height: 1.45; color: var(--muted); }
 .creds b { color: var(--ink); }
 .contact { align-self: end; display: grid; gap: 12px; padding-top: 16px; border-top: 1px solid var(--rule); }
 .mail { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -311,17 +304,16 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
     <section class="id">
       <div class="band">
         <picture><source srcset="assets/foto.webp" type="image/webp"><img src="assets/foto.jpg" data-i18n-alt="alt" alt="Retrato de José Querino de Macêdo Neto" width="1600" height="871"></picture>
-        <button class="qlogo" type="button" data-i18n-aria="logoPlay" aria-label="Logotipo Q: toque ou deslize para girar"><span class="coin"><svg viewBox="240 185 1350 1610" aria-hidden="true"><path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></svg></span></button>
       </div>
       <div class="idb">
-        <div>
-          <p class="eyebrow" data-i18n="eyebrow">Advocacia e pesquisa</p>
-          <h1>Querino <em>Neto</em></h1>
-        </div>
-        <p class="bio" data-i18n="bio">Advogado e Presidente da Liga Brasileira de Esperanto.</p>
+        <h1>Querino <em>Neto</em></h1>
         <div class="creds">
-          <p><b data-i18n="spec">Especialista</b> · <span data-i18n="specList">Regulação e Governança (UFAL) · Argumentação e Justiça (UFRGS) · Turismo e Desenvolvimento (UNIRIO) · Cultura Popular Brasileira (URCA)</span></p>
-          <p><b>OAB/AL</b> · nº 20.662</p>
+          <p><b data-i18n="r1">Presidente</b> • <span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
+          <p><b data-i18n="r2">Secretário Executivo</b> • <span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
+          <p><b data-i18n="r3">Advogado</b> • <span data-i18n="o3">Direito Civil e Direito Administrativo</span></p>
+          <p><b data-i18n="r4">Pesquisador</b> • <span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
+          <p><b data-i18n="r5">Diretor-geral</b> • <span data-i18n="o5">Tribuna Socialista</span></p>
+          <p><b>OAB/AL</b> • nº 20.662</p>
         </div>
         <div class="contact">
           <div class="mail">
@@ -393,7 +385,7 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var T = {
-    pt: { html: 'pt-BR', invert: 'Inverter cores', lang: 'Idioma', links: 'Links', logoPlay: 'Logotipo Q: toque ou deslize para girar',
+    pt: { html: 'pt-BR', r1: 'Presidente', o1: 'Liga Brasileira de Esperanto', r2: 'Secretário Executivo', o2: 'Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas', r3: 'Advogado', o3: 'Direito Civil e Direito Administrativo', r4: 'Pesquisador', o4: 'Regulação, Contratos e Infraestrutura', r5: 'Diretor-geral', o5: 'Tribuna Socialista', invert: 'Inverter cores', lang: 'Idioma', links: 'Links', logoPlay: 'Logotipo Q: toque ou deslize para girar',
       alt: 'Retrato de José Querino de Macêdo Neto', eyebrow: 'Advocacia e pesquisa',
       bio: 'Advogado e Presidente da Liga Brasileira de Esperanto.',
       spec: 'Especialista', specList: 'Regulação e Governança (UFAL) · Argumentação e Justiça (UFRGS) · Turismo e Desenvolvimento (UNIRIO) · Cultura Popular Brasileira (URCA)',
@@ -405,7 +397,7 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
       mailgo: 'Abrir no e-mail', copymsg: 'Copiar mensagem', sent: '<strong>Mensagem enviada.</strong> Obrigado pelo contato! Responderei pelo e-mail informado.',
       errEmail: 'Informe um e-mail válido.', errFill: 'Preencha nome, e-mail e mensagem.', copied: 'Mensagem copiada.', copyFail: 'Não foi possível copiar.',
       mailCopied: 'E-mail copiado.', to: 'Para', none: 'não informado', subject: 'Contato pelo site' },
-    en: { html: 'en', invert: 'Invert colors', lang: 'Language', links: 'Links', logoPlay: 'Q logo: tap or swipe to spin',
+    en: { html: 'en', r1: 'President', o1: 'Brazilian Esperanto League', r2: 'Executive Secretary', o2: 'Alagoas State Department of Environment and Water Resources', r3: 'Lawyer', o3: 'Civil Law and Administrative Law', r4: 'Researcher', o4: 'Regulation, Contracts and Infrastructure', r5: 'Director-General', o5: 'Tribuna Socialista', invert: 'Invert colors', lang: 'Language', links: 'Links', logoPlay: 'Q logo: tap or swipe to spin',
       alt: 'Portrait of José Querino de Macêdo Neto', eyebrow: 'Law and research',
       bio: 'Lawyer and President of the Brazilian Esperanto League.',
       spec: 'Specialist', specList: 'Regulation and Governance (UFAL) · Argumentation and Justice (UFRGS) · Tourism and Development (UNIRIO) · Brazilian Popular Culture (URCA)',
@@ -417,7 +409,7 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
       mailgo: 'Open in email', copymsg: 'Copy message', sent: '<strong>Message sent.</strong> Thank you for reaching out! I’ll reply to the email you provided.',
       errEmail: 'Please enter a valid email.', errFill: 'Please fill in your name, email and message.', copied: 'Message copied.', copyFail: 'Couldn’t copy.',
       mailCopied: 'Email copied.', to: 'To', none: 'not provided', subject: 'Website contact' },
-    es: { html: 'es', invert: 'Invertir colores', lang: 'Idioma', links: 'Enlaces', logoPlay: 'Logotipo Q: toque o deslice para girar',
+    es: { html: 'es', r1: 'Presidente', o1: 'Liga Brasileña de Esperanto', r2: 'Secretario Ejecutivo', o2: 'Secretaría de Estado de Medio Ambiente y Recursos Hídricos de Alagoas', r3: 'Abogado', o3: 'Derecho Civil y Derecho Administrativo', r4: 'Investigador', o4: 'Regulación, Contratos e Infraestructura', r5: 'Director general', o5: 'Tribuna Socialista', invert: 'Invertir colores', lang: 'Idioma', links: 'Enlaces', logoPlay: 'Logotipo Q: toque o deslice para girar',
       alt: 'Retrato de José Querino de Macêdo Neto', eyebrow: 'Abogacía e investigación',
       bio: 'Abogado y Presidente de la Liga Brasileña de Esperanto.',
       spec: 'Especialista', specList: 'Regulación y Gobernanza (UFAL) · Argumentación y Justicia (UFRGS) · Turismo y Desarrollo (UNIRIO) · Cultura Popular Brasileña (URCA)',
@@ -470,41 +462,6 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
     if (document.startViewTransition && !reduce) document.startViewTransition(function () { setInv(on); }).finished.finally(function () { root.classList.remove('no-tr'); });
     else { setInv(on); requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('no-tr'); }); }); }
   }); });
-
-  // Logotipo Q que gira como moeda
-  var logo = document.querySelector('.qlogo'), coin = logo.querySelector('.coin');
-  var ang = 0, w = 0, drag = null, raf = 0, last = 0;
-  function paint() {
-    var m = ((ang % 360) + 360) % 360;
-    if (m === 0 && !w && !drag) { coin.classList.remove('spinning', 'flip'); coin.style.removeProperty('--ry'); return; }
-    coin.classList.add('spinning'); coin.classList.toggle('flip', m > 90 && m < 270); coin.style.setProperty('--ry', ang.toFixed(2) + 'deg');
-  }
-  function step(ts) {
-    var dt = Math.min(.032, (ts - (last || ts)) / 1000 || .016); last = ts;
-    if (!drag) {
-      if (Math.abs(w) > 140) { w *= Math.exp(-1.15 * dt); ang += w * dt; }
-      else { var target = Math.round(ang / 180) * 180; w += (-(ang - target) * 90 - w * 9) * dt; ang += w * dt;
-        if (Math.abs(ang - target) < .2 && Math.abs(w) < 2) { ang = 0; w = 0; paint(); raf = 0; last = 0; return; } }
-    }
-    paint(); raf = requestAnimationFrame(step);
-  }
-  function wake() { if (!raf) raf = requestAnimationFrame(step); }
-  function spin() { if (reduce) return; var d = w < 0 ? -1 : 1; w = Math.max(-4200, Math.min(4200, w + d * 1500)); wake(); }
-  logo.addEventListener('pointerdown', function (e) { if (e.button && e.button !== 0) return; drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, a0: ang, moved: false, hist: [] }; });
-  logo.addEventListener('pointermove', function (e) {
-    if (!drag || e.pointerId !== drag.id) return;
-    var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
-    if (!drag.moved) { if (Math.abs(dx) < 6) return; if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; } drag.moved = true; w = 0; try { logo.setPointerCapture(e.pointerId); } catch (err) {} }
-    ang = drag.a0 + dx * 2; drag.hist.push({ a: ang, t: performance.now() }); if (drag.hist.length > 5) drag.hist.shift(); wake();
-  });
-  logo.addEventListener('pointerup', function (e) {
-    if (!drag || e.pointerId !== drag.id) return; var d = drag; drag = null;
-    if (!d.moved) { spin(); return; }
-    var h = d.hist; if (h.length > 1) { var a = h[0], b = h[h.length - 1], dt = (b.t - a.t) / 1000 || .016; w = Math.max(-4200, Math.min(4200, (b.a - a.a) / dt)); }
-    if (reduce) { ang = 0; w = 0; paint(); return; } wake();
-  });
-  logo.addEventListener('pointercancel', function () { if (drag) { drag = null; wake(); } });
-  logo.addEventListener('click', function (e) { if (e.detail === 0) spin(); });
 
   // Copiar e-mail
   function copy(text, cb) { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { cb(true); }, function () { cb(false); }); else cb(false); }
