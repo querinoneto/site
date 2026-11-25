@@ -162,8 +162,6 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Querino Neto, advogado. Retrato em preto e branco ao lado do nome e das especializações.">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
 <meta property="profile:first_name" content="José Querino">
 <meta property="profile:last_name" content="de Macêdo Neto">
 <meta name="twitter:card" content="summary_large_image">
@@ -190,36 +188,18 @@
   --hh: 3.5rem;
   color-scheme: light;
 }
-:root[data-inv] { --paper: #232323; --ink: #fefefe; --mute: #a8a8a8; --line: #444; --haze: #3a3a3a; color-scheme: dark; }
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { height: 100%; }
 html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.5 var(--body); overflow-x: hidden; }
 /* Troca de cores: a página inteira muda de uma vez (sem transições parciais que revelam o contorno da foto) */
-.no-tr *, .no-tr *::before, .no-tr *::after { transition: none !important; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; animation-timing-function: ease; }
 h1, p { margin: 0; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
 
 .page { height: 100dvh; min-height: 34rem; display: flex; flex-direction: column; overflow: clip; }
-.bar { flex: none; height: var(--hh); border-bottom: 1px solid var(--line); }
-.bar .in { height: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; }
-.brand { font-weight: 700; letter-spacing: -.01em; }
-.tools { display: flex; align-items: center; gap: .5rem; }
-.lang { position: relative; }
-.lang-btn { font-size: .68rem; letter-spacing: .06em; }
-.lang-menu { position: absolute; right: 0; top: calc(100% + .4rem); z-index: 40; min-width: 9.5rem; margin: 0; padding: .3rem 0; list-style: none; background: var(--paper); border: 1px solid var(--ink); box-shadow: 4px 4px 0 var(--line); }
-.lang-menu button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 1rem; padding: .55rem .8rem; background: none; border: 0; color: var(--ink); cursor: pointer; font: 400 .9rem/1.2 var(--body); text-align: left; }
-.lang-menu button span { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; color: var(--mute); }
-.lang-menu button[aria-current="true"] { font-weight: 700; }
-@media (hover: hover) { .lang-menu button:hover { background: var(--line); } }
-.icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; padding: 0; background: none; color: inherit; border: 1px solid var(--ink); cursor: pointer; font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
-.icon-btn svg { width: .95rem; height: .95rem; }
-@media (hover: hover) { .icon-btn:hover { background: var(--line); } }
-.icon-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
 .main { flex: 1; min-height: 0; width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(1rem, 4vw, 3rem); }
 .copy { align-self: center; position: relative; z-index: 3; padding: 1rem 0; }
@@ -251,7 +231,6 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 .visual { position: relative; min-height: 0; overflow: hidden; background: var(--line); }
 .visual picture, .visual img { display: block; width: 100%; height: 100%; }
 .visual img { object-fit: cover; object-position: 50% 50%; }
-:root[data-inv] .visual img { filter: brightness(.9); }
 /* Em repouso o Q não tem transformação 3D; ela só existe enquanto gira */
 
 /* Celular: foto ocupa o espaço que sobrar */
@@ -295,13 +274,10 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 /* Moldura em cartão (estrutura inspirada em jordao.com.br): cartão com cantos arredondados,
    borda fina e sombra suave; foto inteira no topo da coluna esquerda; linha dividindo as colunas */
 :root { --page: #ffffff; }
-:root[data-inv] { --page: #1a1a1a; }
 body { background: var(--page); }
 .page { height: auto; min-height: 100dvh; overflow: visible; }
 .main { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; justify-items: center; padding: clamp(1rem, 3vh, 2rem) var(--gutter); }
-.bar .in { max-width: calc(1100px + 2 * var(--gutter)); }
 .card { width: 100%; max-width: 1100px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); background: var(--paper); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px -30px rgba(21, 21, 21, .28); }
-:root[data-inv] .card { box-shadow: 0 20px 50px -30px rgba(0, 0, 0, .7); }
 .id { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
 .visual { order: 0; aspect-ratio: 1600 / 871; width: 100%; height: auto; max-height: none; margin: 0; }
 .idb { flex: 1; display: flex; align-items: center; padding: clamp(1.25rem, 3vh, 1.75rem) clamp(1.5rem, 3vw, 2.25rem); }
@@ -310,7 +286,7 @@ body { background: var(--page); }
 .copy .lead { margin-top: 0; font-size: clamp(1rem, 1.45vw, 1.15rem); }
 .copy .links { max-width: none; }
 @media (max-width: 860px) {
-  .main { align-content: start; padding: 0 var(--gutter) 1rem; }
+  .main { align-content: start; padding: 1rem var(--gutter); }
   .card { grid-template-columns: minmax(0, 1fr); }
   .id { border-right: 0; border-bottom: 1px solid var(--line); }
   .idb { padding: 1.1rem 1.25rem 1.2rem; }
@@ -318,21 +294,13 @@ body { background: var(--page); }
   .copy { padding: 1.1rem 1.25rem 1.25rem; }
   .copy .lead { font-size: clamp(.7rem, 3.2vw, 1rem); }
 }
-/* Celular: sem nome no topo; idioma e inverter cores centralizados acima da foto */
+/* Celular: cartão centralizado na tela */
 @media (max-width: 860px) {
-  .bar { height: auto; border-bottom: 0; }
-  .bar .in { justify-content: flex-end; padding: .75rem var(--gutter) .5rem; }
-  .bar .icon-btn { width: 1.9rem; height: 1.9rem; }
-  .bar .icon-btn svg { width: .8rem; height: .8rem; }
-  .bar .lang-btn { font-size: .6rem; }
-  .tools { gap: .35rem; }
-  .brand { display: none; }
   .page { justify-content: center; }
   .main { flex: none; }
 }
 @media (max-width: 420px) {
-  .main { padding: 0 .75rem .75rem; }
-  .bar .in { padding-inline: .75rem; }
+  .main { padding: .75rem; }
   .idb { padding: .9rem 1.1rem 1rem; }
   .copy { padding: 1rem 1.1rem 1.15rem; }
 }
@@ -348,9 +316,7 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
 
 /* Janela de mensagem na identidade nova: moldura arredondada como o cartão, borda fina, sombra suave */
 .modal { background: rgba(17, 17, 17, .28); -webkit-backdrop-filter: blur(8px) saturate(1.1); backdrop-filter: blur(8px) saturate(1.1); }
-:root[data-inv] .modal { background: rgba(0, 0, 0, .55); }
 .sheet { width: min(100%, 36rem); border: 1px solid var(--line); border-radius: 20px; padding: clamp(1.4rem, 3.5vw, 2.1rem); box-shadow: 0 30px 70px -30px rgba(17, 17, 17, .45); animation: up .28s cubic-bezier(.2, .7, .2, 1) both; }
-:root[data-inv] .sheet { box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .9); }
 @keyframes up { from { transform: translateY(14px) scale(.985); opacity: 0; } to { transform: none; opacity: 1; } }
 .sheet-head { align-items: flex-start; margin-bottom: 1.4rem; }
 .sheet-head h2 { font: 800 clamp(1.7rem, 3.4vw, 2.1rem)/1 var(--display); letter-spacing: -.04em; }
@@ -380,28 +346,17 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
   .cform { gap: .8rem; }
   .field textarea { min-height: 6.5rem; }
 }
+@media (max-width: 420px) and (max-height: 640px) {
+  .main { padding: .5rem .75rem; }
+  .idb { padding: .7rem 1rem .75rem; }
+  .copy { padding: .8rem 1rem .9rem; }
+  .creds { font-size: .85rem; gap: .25rem; }
+  h1.name { font-size: 1.9rem; }
+}
 </style>
 </head>
 <body>
 <div class="page">
-  <header class="bar">
-    <div class="in">
-      <span class="brand">Querino Neto</span>
-      <div class="tools">
-        <div class="lang">
-          <button class="icon-btn lang-btn" type="button" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" data-i18n-aria="lang" data-i18n-title="lang" aria-label="Idioma" title="Idioma"><span id="langCode">PT</span></button>
-          <ul class="lang-menu" id="langMenu" hidden>
-            <li><button type="button" data-lang="pt" lang="pt-BR">Português <span>PT</span></button></li>
-            <li><button type="button" data-lang="en" lang="en">English <span>EN</span></button></li>
-            <li><button type="button" data-lang="es" lang="es">Español <span>ES</span></button></li>
-          </ul>
-        </div>
-        <button class="icon-btn" type="button" data-invert aria-pressed="false" data-i18n-aria="invert" data-i18n-title="invert" aria-label="Inverter cores" title="Inverter cores">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
 
   <main class="main">
     <div class="card">
@@ -467,7 +422,7 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Textos em português, inglês e espanhol
+  // Textos da página
   var T = {
     pt: {
       r1: 'Presidente', o1: 'Liga Brasileira de Esperanto', r2: 'Secretário Executivo', o2: 'Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas', r3: 'Advogado', o3: 'OAB/AL nº 20.662', r4: 'Pesquisador', o4: 'Regulação, Contratos e Infraestrutura',
@@ -484,97 +439,11 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
       errEmail: 'Informe um e-mail válido.', errFill: 'Preencha nome, e-mail e mensagem.',
       copied: 'Mensagem copiada.', copyFail: 'Não foi possível copiar.', mailCopied: 'E-mail copiado: MAIL', mailShow: 'E-mail: MAIL',
       to: 'Para', none: 'não informado', subject: 'Contato pelo site'
-    },
-    en: {
-      r1: 'President', o1: 'Brazilian Esperanto League', r2: 'Executive Secretary', o2: 'Alagoas State Department of Environment and Water Resources', r3: 'Lawyer', o3: 'OAB/AL nº 20.662', r4: 'Researcher', o4: 'Regulation, Contracts and Infrastructure',
-      html: 'en', invert: 'Invert colors', lang: 'Language',
-      h1: 'Hi,<br>I’m Querino!',
-      lead: 'Lawyer with specializations in Regulation and Governance (UFAL), Argumentation and Justice (UFRGS), Tourism and Development (UNIRIO) and Brazilian Popular Culture (URCA).',
-      links: 'Contact and social media', open: 'Send a message', copyMail: 'Copy email: MAIL', x: 'X (formerly Twitter)',
-      alt: 'Portrait of José Querino de Macêdo Neto', logo: 'Logo: block letter Q', logoPlay: 'Q logo: tap or swipe to spin',
-      mtitle: 'Get in touch', close: 'Close', name: 'Name', phone: 'Phone', phonePh: 'Optional', email: 'Email', msg: 'Message',
-      note: 'Your details will only be used to reply to this message.', submit: 'Send message', sending: 'Sending…',
-      fail: 'The message couldn’t be sent through the site right now. Open it in your email app to send it, or copy the text and send it to MAIL.',
-      mailgo: 'Open in email', copymsg: 'Copy message',
-      sent: '<strong>Message sent.</strong> Thank you for reaching out! I’ll reply to the email you provided.',
-      errEmail: 'Please enter a valid email.', errFill: 'Please fill in your name, email and message.',
-      copied: 'Message copied.', copyFail: 'Couldn’t copy.', mailCopied: 'Email copied: MAIL', mailShow: 'Email: MAIL',
-      to: 'To', none: 'not provided', subject: 'Website contact'
-    },
-    es: {
-      r1: 'Presidente', o1: 'Liga Brasileña de Esperanto', r2: 'Secretario Ejecutivo', o2: 'Secretaría de Estado de Medio Ambiente y Recursos Hídricos de Alagoas', r3: 'Abogado', o3: 'OAB/AL nº 20.662', r4: 'Investigador', o4: 'Regulación, Contratos e Infraestructura',
-      html: 'es', invert: 'Invertir colores', lang: 'Idioma',
-      h1: '¡Hola,<br>soy Querino!',
-      lead: 'Abogado con especialización en Regulación y Gobernanza (UFAL), Argumentación y Justicia (UFRGS), Turismo y Desarrollo (UNIRIO) y Cultura Popular Brasileña (URCA).',
-      links: 'Contacto y redes sociales', open: 'Enviar mensaje', copyMail: 'Copiar correo: MAIL', x: 'X (antes Twitter)',
-      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q en bloques', logoPlay: 'Logotipo Q: toque o deslice para girar',
-      mtitle: 'Hablemos', close: 'Cerrar', name: 'Nombre', phone: 'Teléfono', phonePh: 'Opcional', email: 'Correo electrónico', msg: 'Mensaje',
-      note: 'Sus datos se usarán solo para responder a este mensaje.', submit: 'Enviar mensaje', sending: 'Enviando…',
-      fail: 'No fue posible enviarlo desde el sitio en este momento. Abra el mensaje en su correo para enviarlo, o copie el texto y envíelo a MAIL.',
-      mailgo: 'Abrir en el correo', copymsg: 'Copiar mensaje',
-      sent: '<strong>Mensaje enviado.</strong> ¡Gracias por escribir! Responderé al correo que indicó.',
-      errEmail: 'Introduzca un correo válido.', errFill: 'Complete su nombre, correo y mensaje.',
-      copied: 'Mensaje copiado.', copyFail: 'No se pudo copiar.', mailCopied: 'Correo copiado: MAIL', mailShow: 'Correo: MAIL',
-      to: 'Para', none: 'no indicado', subject: 'Contacto desde el sitio'
     }
   };
   var LANG = 'pt';
   function t(k) { return (T[LANG][k] || T.pt[k] || '').replace('MAIL', MAIL); }
-  function store(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
-  function stored(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-  function pickLang() {
-    var q = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
-    if (T[q]) return q;
-    var s = stored('lang'); if (T[s]) return s;
-    var nav = (navigator.languages || [navigator.language || 'pt']);
-    for (var i = 0; i < nav.length; i++) { var c = String(nav[i]).slice(0, 2).toLowerCase(); if (T[c]) return c; }
-    return 'pt';
-  }
-  function each(sel, fn) { [].forEach.call(document.querySelectorAll(sel), fn); }
-  function setLang(l) {
-    LANG = T[l] ? l : 'pt';
-    root.lang = T[LANG].html;
-    each('[data-i18n]', function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
-    each('[data-i18n-html]', function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
-    each('[data-i18n-aria]', function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
-    each('[data-i18n-title]', function (el) { el.setAttribute('title', t(el.getAttribute('data-i18n-title'))); });
-    each('[data-i18n-alt]', function (el) { el.setAttribute('alt', t(el.getAttribute('data-i18n-alt'))); });
-    each('[data-i18n-ph]', function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
-    document.getElementById('langCode').textContent = LANG.toUpperCase();
-    each('[data-lang]', function (b) { b.setAttribute('aria-current', b.getAttribute('data-lang') === LANG ? 'true' : 'false'); });
-  }
-  setLang(pickLang());
-
-  var langBtn = document.getElementById('langBtn'), langMenu = document.getElementById('langMenu');
-  function menu(open) { langMenu.hidden = !open; langBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
-  langBtn.addEventListener('click', function (e) { e.stopPropagation(); menu(langMenu.hidden); if (!langMenu.hidden) langMenu.querySelector('[aria-current="true"]').focus(); });
-  each('[data-lang]', function (b) {
-    b.addEventListener('click', function () {
-      var l = b.getAttribute('data-lang');
-      setLang(l); store('lang', l); menu(false); langBtn.focus();
-      try { var u = new URL(location.href); if (l === 'pt') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u); } catch (e) {}
-    });
-  });
-  document.addEventListener('click', function (e) { if (!langMenu.hidden && !langMenu.contains(e.target)) menu(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !langMenu.hidden) { menu(false); langBtn.focus(); } });
-
-  var invBtns = [].slice.call(document.querySelectorAll('[data-invert]'));
-  function setInv(on) {
-    if (on) root.setAttribute('data-inv', ''); else root.removeAttribute('data-inv');
-    invBtns.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-  }
-  setInv(false);
-  function toggleInv() {
-    var on = !root.hasAttribute('data-inv');
-    root.classList.add('no-tr');
-    if (document.startViewTransition && !reduce) {
-      document.startViewTransition(function () { setInv(on); }).finished.finally(function () { root.classList.remove('no-tr'); });
-    } else {
-      setInv(on);
-      requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('no-tr'); }); });
-    }
-  }
-  invBtns.forEach(function (b) { b.addEventListener('click', toggleInv); });
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
 
   function copy(text, cb) {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { cb(true); }, function () { cb(false); });
