@@ -215,9 +215,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 .id { display: flex; flex-direction: column; border-right: 1px solid var(--rule); }
 /* Faixa da foto */
 .band { position: relative; aspect-ratio: 20 / 7; overflow: hidden; background: var(--band); }
-.band img { position: absolute; left: 50%; top: 8%; width: 44%; height: auto; transform: translateX(-50%); }
-.band::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--band) 70%, transparent)); }
-.qlogo { position: absolute; z-index: 2; left: 24px; top: 20px; width: 30px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; perspective: 500px; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+.band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; }
+.band::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 34%; background: linear-gradient(to right, rgba(0,0,0,.28), transparent); pointer-events: none; }
+.qlogo { position: absolute; z-index: 2; left: 24px; top: 20px; width: 30px; padding: 0; border: 0; background: none; color: #fff; filter: drop-shadow(0 1px 6px rgba(0,0,0,.35)); cursor: pointer; perspective: 500px; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
 .qlogo svg { display: block; width: 100%; height: auto; fill: currentColor; }
 .coin { display: block; }
 .coin.spinning { transform: rotateY(var(--ry, 0deg)); }
@@ -310,7 +310,7 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
   <main class="card">
     <section class="id">
       <div class="band">
-        <img src="assets/retrato.webp" data-i18n-alt="alt" alt="Retrato de José Querino de Macêdo Neto" width="1000" height="1250">
+        <picture><source srcset="assets/foto.webp" type="image/webp"><img src="assets/foto.jpg" data-i18n-alt="alt" alt="Retrato de José Querino de Macêdo Neto" width="1600" height="871"></picture>
         <button class="qlogo" type="button" data-i18n-aria="logoPlay" aria-label="Logotipo Q: toque ou deslize para girar"><span class="coin"><svg viewBox="240 185 1350 1610" aria-hidden="true"><path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></svg></span></button>
       </div>
       <div class="idb">
