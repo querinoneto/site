@@ -194,7 +194,7 @@
 <meta name="twitter:image" content="https://querinoneto.com.br/assets/compartilhar.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
 <style>
 /* Plano: cartão de visita de uma tela só, branco e preto do logotipo.
    Layout: retrato esfumaçado + saudação + links, tudo visível sem rolar. */
@@ -220,7 +220,7 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.
 h1, p { margin: 0; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.mono { font-family: var(--body); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
 
 .page { height: 100dvh; min-height: 34rem; display: flex; flex-direction: column; overflow: clip; }
 
@@ -241,7 +241,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   text-decoration: none; cursor: pointer; font: 500 .95rem/1 var(--body); text-align: left;
   transition: transform .2s ease, background-color .2s ease, color .2s ease;
 }
-.lk .ar { font-family: var(--mono); font-size: .8rem; transition: transform .2s ease; }
+.lk .ar { font-family: var(--body); font-size: 1rem; transition: transform .2s ease; }
 .lk.primary { background: var(--ink); color: var(--paper); }
 
 
@@ -352,7 +352,7 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
 .note { font-size: .8rem; line-height: 1.45; }
 .send { display: grid; gap: .6rem; }
 .btn.submit { width: 100%; justify-content: space-between; gap: .75rem; height: 3rem; padding: 0 1rem; font: 500 .95rem/1 var(--body); transition: background-color .2s ease, color .2s ease; }
-.btn.submit .ar { font-family: var(--mono); font-size: .8rem; transition: transform .2s ease; }
+.btn.submit .ar { font-family: var(--body); font-size: 1rem; transition: transform .2s ease; }
 .status:empty { display: none; }
 .ready { border: 1px solid var(--line); background: color-mix(in srgb, var(--line) 22%, var(--paper)); padding: 1rem 1.1rem; font-size: .95rem; line-height: 1.5; }
 #sent { border-color: color-mix(in srgb, #2e7d32 45%, var(--line)); }
@@ -392,6 +392,32 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
   .copy .links { margin-top: 1.4rem; display: flex; align-items: center; gap: .6rem; }
   .copy .links .lk.primary { flex: 1; }
   .copy .links .social { flex: none; }
+}
+
+/* Tipografia: duas famílias apenas — Newsreader itálico para títulos, Archivo para todo o resto */
+:root { --serif: "Newsreader", Georgia, "Times New Roman", serif; }
+h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); letter-spacing: -.015em; }
+.sheet-head h2 { font: italic 400 clamp(1.9rem, 3.4vw, 2.3rem)/1.05 var(--serif); letter-spacing: -.01em; }
+/* Sem a linha entre o nome e os dados, com espaçamento mais justo */
+.id, .id[class] { border-bottom: 0; }
+.idb { padding-bottom: .15rem; }
+.copy { padding-top: .85rem; }
+@media (max-width: 860px) {
+  h1.name { font-size: clamp(2.3rem, 10vw, 2.8rem); }
+  .idb { padding-bottom: .1rem; }
+  .copy { padding-top: .7rem; }
+}
+/* Computador: cartão mais largo; os cargos se ajustam para a linha da Secretaria caber inteira */
+@media (min-width: 861px) {
+  .card { max-width: min(1000px, calc((100dvh - 365px) * 1.837)); min-width: min(600px, 100%); }
+  .idb { padding: 1.5rem 2.5rem .15rem; }
+  .copy { padding: .9rem 2.5rem 1.85rem; container-type: inline-size; }
+  .copy { --t: min(1.05rem, calc(100cqi / 45.5)); }
+  .creds { font-size: var(--t); gap: .35rem; }
+  .copy .links .lk { font-size: var(--t); height: calc(var(--t) * 3); }
+  .copy .links .ico { width: calc(var(--t) * 3); height: calc(var(--t) * 3); }
+  .creds p { white-space: nowrap; }
+  .copy .links { margin-top: 1.3rem; }
 }
 </style>
 </head>
