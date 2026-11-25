@@ -380,6 +380,19 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
 }
 .lk:focus-visible, .ico:focus-visible, .x:focus-visible, .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .lk:active, .ico:active, .x:active, .btn:active:not([disabled]) { transform: scale(.97); }
+
+/* Computador: cartão em linhas — foto inteira no topo e dados embaixo (o celular não muda) */
+@media (min-width: 861px) {
+  .card { grid-template-columns: minmax(0, 1fr); max-width: min(780px, calc((100dvh - 430px) * 1.837)); min-width: min(520px, 100%); }
+  .id { border-right: 0; border-bottom: 1px solid var(--line); }
+  .idb { padding: 1.5rem 2.25rem 1.35rem; }
+  .idb h1.name { font-size: clamp(2.3rem, 3.2vw, 2.9rem); }
+  .copy { align-self: stretch; padding: 1.4rem 2.25rem 1.75rem; }
+  .creds { gap: .4rem; font-size: 1rem; }
+  .copy .links { margin-top: 1.4rem; display: flex; align-items: center; gap: .6rem; }
+  .copy .links .lk.primary { flex: 1; }
+  .copy .links .social { flex: none; }
+}
 </style>
 </head>
 <body>
