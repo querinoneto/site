@@ -173,202 +173,195 @@
 <meta name="twitter:image" content="https://querinoneto.com.br/assets/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-/* Plano: cartão de visita de uma tela só, branco e preto do logotipo.
-   Layout: retrato esfumaçado + saudação + links, tudo visível sem rolar. */
+/* Estrutura e visual inspirados em jordao.com.br: cartão único com identidade à esquerda e links agrupados à direita */
 :root {
-  --paper: #fefefe;
-  --ink: #232323;
-  --mute: #6a6a6a;
-  --line: #d8d8d8;
-  --haze: #e9e9e9;
-  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --mono: "DM Mono", ui-monospace, Menlo, monospace;
-  --gutter: clamp(1.25rem, 4vw, 3rem);
-  --hh: 3.5rem;
+  --bg: #F4F5F2; --surface: #FFFFFF; --ink: #15232E; --muted: #64707A; --rule: #E1E5E2;
+  --navy: #1B3A52; --gold: #C8902A; --blue: #2F5E8C; --band: #E1E5E2;
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
 }
-:root[data-inv] { --paper: #232323; --ink: #fefefe; --mute: #a8a8a8; --line: #444; --haze: #3a3a3a; color-scheme: dark; }
+:root[data-inv] {
+  --bg: #0F171E; --surface: #15212B; --ink: #E8ECEF; --muted: #93A0AA; --rule: #26343F;
+  --navy: #9CC0DE; --gold: #E0AE55; --blue: #8DB7E0; --band: #1C2A35; color-scheme: dark;
+}
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html, body { height: 100%; }
-html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.5 var(--body); overflow-x: hidden; }
-/* Troca de cores: a página inteira muda de uma vez (sem transições parciais que revelam o contorno da foto) */
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 15px/1.5 var(--body); -webkit-font-smoothing: antialiased; }
+h1, h2, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+b { font-weight: 600; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .no-tr *, .no-tr *::before, .no-tr *::after { transition: none !important; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; animation-timing-function: ease; }
-h1, p { margin: 0; }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
 
-.page { height: 100dvh; min-height: 34rem; display: flex; flex-direction: column; overflow: clip; }
-.bar { flex: none; height: var(--hh); border-bottom: 1px solid var(--line); }
-.bar .in { height: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; }
-.brand { font-weight: 700; letter-spacing: -.01em; }
-.tools { display: flex; align-items: center; gap: .5rem; }
+.page { min-height: 100dvh; display: grid; align-items: center; padding: 42px 24px; }
+.tools { position: fixed; top: 12px; right: 14px; z-index: 30; display: flex; gap: 6px; }
+.tb { height: 28px; min-width: 28px; padding: 0 9px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); color: var(--muted); font: 600 10.5px/1 var(--body); letter-spacing: .08em; cursor: pointer; transition: color .15s, border-color .15s; }
+.tb:hover { color: var(--ink); border-color: var(--muted); }
+.tb svg { width: 13px; height: 13px; }
 .lang { position: relative; }
-.lang-btn { font-size: .68rem; letter-spacing: .06em; }
-.lang-menu { position: absolute; right: 0; top: calc(100% + .4rem); z-index: 40; min-width: 9.5rem; margin: 0; padding: .3rem 0; list-style: none; background: var(--paper); border: 1px solid var(--ink); box-shadow: 4px 4px 0 var(--line); }
-.lang-menu button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 1rem; padding: .55rem .8rem; background: none; border: 0; color: var(--ink); cursor: pointer; font: 400 .9rem/1.2 var(--body); text-align: left; }
-.lang-menu button span { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; color: var(--mute); }
-.lang-menu button[aria-current="true"] { font-weight: 700; }
-@media (hover: hover) { .lang-menu button:hover { background: var(--line); } }
-.icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; padding: 0; background: none; color: inherit; border: 1px solid var(--ink); cursor: pointer; font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
-.icon-btn svg { width: .95rem; height: .95rem; }
-@media (hover: hover) { .icon-btn:hover { background: var(--line); } }
-.icon-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.lang-menu { position: absolute; right: 0; top: calc(100% + 6px); min-width: 150px; padding: 5px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; box-shadow: 0 16px 40px -20px rgba(21,35,46,.35); }
+.lang-menu button { display: flex; width: 100%; justify-content: space-between; gap: 1rem; padding: 7px 10px; border: 0; border-radius: 8px; background: none; color: var(--ink); font: 400 13.5px/1.2 var(--body); cursor: pointer; text-align: left; }
+.lang-menu button span { color: var(--muted); font-size: 11px; letter-spacing: .08em; }
+.lang-menu button:hover { background: color-mix(in srgb, var(--navy) 8%, transparent); }
+.lang-menu button[aria-current="true"] { font-weight: 600; }
 
-.main { flex: 1; min-height: 0; width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(1rem, 4vw, 3rem); }
-.copy { align-self: center; position: relative; z-index: 3; padding: 1rem 0; }
-h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: -.04em; white-space: nowrap; }
-.lead { margin-top: 1.25rem; max-width: 32rem; font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.45; }
-.oab { margin-top: .35rem; color: var(--mute); }
-
-.links { margin-top: 1.75rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: .6rem; max-width: 30rem; }
-.social { display: flex; gap: .5rem; }
-.ico { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: transform .2s ease, background-color .2s ease, color .2s ease; }
-.ico svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
-.ico svg[fill="none"] { fill: none; }
-@media (hover: hover) { .ico:hover { background: var(--ink); color: var(--paper); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--line); } }
-.lk {
-  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
-  height: 3rem; padding: 0 1rem; border: 1px solid var(--ink); background: transparent; color: var(--ink);
-  text-decoration: none; cursor: pointer; font: 500 .95rem/1 var(--body); text-align: left;
-  transition: transform .2s ease, background-color .2s ease, color .2s ease;
-}
-.lk .ar { font-family: var(--mono); font-size: .8rem; transition: transform .2s ease; }
-.lk.primary { background: var(--ink); color: var(--paper); }
-@media (hover: hover) {
-  .lk:hover { background: var(--ink); color: var(--paper); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--line); }
-  .lk:hover .ar { transform: translateX(3px); }
-  .lk.primary:hover { box-shadow: 4px 4px 0 var(--line); }
-}
-
-/* Retrato esfumaçado */
-.visual { position: relative; min-height: 0; display: flex; align-items: flex-end; justify-content: center; isolation: isolate; padding-top: 1.5rem; }
-.haze { position: absolute; inset: 0 -10% -8% -30%; z-index: -1; background: radial-gradient(closest-side at 52% 42%, color-mix(in srgb, var(--haze) 100%, transparent) 0%, color-mix(in srgb, var(--haze) 85%, transparent) 20%, color-mix(in srgb, var(--haze) 55%, transparent) 40%, color-mix(in srgb, var(--haze) 28%, transparent) 60%, color-mix(in srgb, var(--haze) 9%, transparent) 80%, color-mix(in srgb, var(--haze) 0%, transparent) 100%); filter: blur(24px); }
-.frame { position: relative; height: 100%; max-height: 40rem; aspect-ratio: 4 / 5; max-width: 100%; }
-.portrait { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
-.veil { position: absolute; left: -4%; right: -4%; bottom: -2px; height: 82%; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 0%, transparent) 0%, color-mix(in srgb, var(--paper) 3%, transparent) 10%, color-mix(in srgb, var(--paper) 9%, transparent) 20%, color-mix(in srgb, var(--paper) 18%, transparent) 30%, color-mix(in srgb, var(--paper) 30%, transparent) 40%, color-mix(in srgb, var(--paper) 45%, transparent) 50%, color-mix(in srgb, var(--paper) 60%, transparent) 58%, color-mix(in srgb, var(--paper) 74%, transparent) 65%, color-mix(in srgb, var(--paper) 87%, transparent) 72%, color-mix(in srgb, var(--paper) 95%, transparent) 78%, color-mix(in srgb, var(--paper) 99%, transparent) 83%, color-mix(in srgb, var(--paper) 100%, transparent) 86%, color-mix(in srgb, var(--paper) 100%, transparent) 100%); }
-.hero-logo { position: absolute; z-index: 2; left: 4%; top: 3%; width: 24%; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; touch-action: pan-y; perspective: 700px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
-.hero-logo.dragging { cursor: grabbing; }
-/* Em repouso o Q não tem transformação 3D; ela só existe enquanto gira */
+.card { max-width: 1100px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); background: var(--surface); border: 1px solid var(--rule); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px -30px rgba(21, 35, 46, .2); }
+.id { display: flex; flex-direction: column; border-right: 1px solid var(--rule); }
+/* Faixa da foto */
+.band { position: relative; aspect-ratio: 20 / 7; overflow: hidden; background: var(--band); }
+.band img { position: absolute; left: 50%; top: 8%; width: 44%; height: auto; transform: translateX(-50%); }
+.band::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--band) 70%, transparent)); }
+.qlogo { position: absolute; z-index: 2; left: 24px; top: 20px; width: 30px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; perspective: 500px; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+.qlogo svg { display: block; width: 100%; height: auto; fill: currentColor; }
 .coin { display: block; }
 .coin.spinning { transform: rotateY(var(--ry, 0deg)); }
 .coin.spinning.flip svg { transform: scaleX(-1); }
-.hero-logo:focus:not(:focus-visible) { outline: none; }
-.hero-logo svg { display: block; width: 100%; height: auto; fill: currentColor; overflow: visible; }
-.hero-logo .tail { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
-.hero-logo .tail-in { animation: tail-in 1.1s cubic-bezier(.2,.8,.2,1) both; }
-@keyframes tail-in { from { transform: translate(110px, 110px); } to { transform: none; } }
-
-/* Computador: retrato e logotipo um pouco mais altos */
-@media (min-width: 861px) {
-  .visual { align-items: center; padding: 1rem 0 9vh; }
-  .frame { height: auto; max-height: min(40rem, 100%); }
-  .portrait { height: auto; max-height: min(40rem, calc(100dvh - var(--hh) - 9vh - 1rem)); }
-}
-/* Celular: foto ocupa o espaço que sobrar */
-@media (max-width: 860px) {
-  .main { display: flex; flex-direction: column; gap: 0; }
-  .visual { order: -1; flex: 1 1 auto; padding-top: .75rem; margin-inline: calc(-1 * var(--gutter)); }
-  .frame { max-height: none; }
-  .haze { inset: 0 -5% 0 -5%; }
-  .copy { flex: none; margin-top: -2.25rem; padding: 0 0 max(1rem, env(safe-area-inset-bottom)); }
-  h1 { font-size: clamp(2.1rem, 10vw, 2.9rem); }
-  :root { --gutter: 1rem; }
-  .lead { margin-top: .6rem; font-size: clamp(.7rem, 3.2vw, 1rem); line-height: 1.4; letter-spacing: -.01em; }
-  .links { margin-top: 1rem; gap: .5rem; max-width: none; }
-  .lk { height: 2.75rem; font-size: .9rem; }
-}
-@media (max-width: 860px) and (max-height: 640px) { .lk { height: 2.5rem; } .ico { width: 2.5rem; height: 2.5rem; } }
-
-/* Janela de contato */
-.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: var(--gutter); background: color-mix(in srgb, var(--ink) 35%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.sheet { width: min(100%, 34rem); max-height: 100%; overflow: auto; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); padding: clamp(1.25rem, 4vw, 2rem); box-shadow: 8px 8px 0 var(--ink); animation: up .25s ease both; }
-@keyframes up { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
-.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
-.sheet-head h2 { margin: 0; font: 800 1.6rem/1.1 var(--display); letter-spacing: -.03em; }
-.x { width: 2.25rem; height: 2.25rem; border: 1px solid var(--ink); background: none; color: inherit; cursor: pointer; font-size: 1.1rem; line-height: 1; }
-.cform { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.25rem; }
+.idb { flex: 1; padding: 24px 36px 30px; display: grid; gap: 16px; grid-template-rows: auto auto auto 1fr; }
+.eyebrow { margin: 0 0 4px; font-size: 10.88px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--gold); }
+h1 { font: 400 30.4px/1 var(--display); letter-spacing: -.015em; color: var(--ink); }
+h1 em { color: var(--navy); }
+.bio { font-size: 15.2px; color: var(--ink); }
+.creds { display: grid; gap: 3px; font-size: 13.12px; color: var(--muted); }
+.creds b { color: var(--ink); }
+.contact { align-self: end; display: grid; gap: 12px; padding-top: 16px; border-top: 1px solid var(--rule); }
+.mail { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mail a { font: 400 18.4px/1.5 var(--display); color: var(--navy); overflow-wrap: anywhere; }
+.mail a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pill { font: 600 11.52px/1.4 var(--body); color: var(--muted); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 3px 10px; cursor: pointer; transition: color .15s, border-color .15s; }
+.pill:hover { color: var(--ink); border-color: var(--muted); }
+.socials { display: flex; gap: 8px; }
+.soc { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--rule); color: var(--muted); transition: color .15s, border-color .15s, background .15s; }
+.soc svg { width: 15px; height: 15px; fill: currentColor; }
+.soc:hover, .soc:focus-visible { color: var(--surface); background: var(--navy); border-color: var(--navy); }
+.status { min-height: 1.2em; font-size: 12px; color: var(--muted); }
+/* Coluna de links */
+.links { padding: 30px 32px 26px; display: grid; gap: 20px; align-content: start; }
+h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.links li + li { border-top: 1px solid var(--rule); }
+.row { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 11px; align-items: center; padding: 7px 6px; margin: 0 -6px; border-radius: 8px; transition: background .15s; }
+.row:hover, .row:focus-visible { background: color-mix(in srgb, var(--c) 9%, transparent); }
+.logo { width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; background: var(--c); color: var(--fg, #fff); }
+.logo svg { width: 11px; height: 11px; fill: currentColor; }
+.logo b { font-size: 9px; line-height: 1; }
+.t { min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; }
+.nm { font-size: 13.44px; letter-spacing: .005em; }
+.ds { font-size: 11.52px; color: var(--muted); }
+.arr { font-size: 12.48px; color: var(--muted); opacity: .7; transition: transform .15s, color .15s; }
+.row:hover .arr { transform: translateX(3px); color: var(--c); }
+.row.pend { pointer-events: none; }
+.row.pend .nm, .row.pend .logo { opacity: .45; }
+.row.pend .ds { font-style: italic; }
+/* Janela de mensagem */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(21, 35, 46, .35); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.sheet { width: min(100%, 520px); max-height: 100%; overflow: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 20px; padding: 26px 28px; box-shadow: 0 30px 60px -30px rgba(21,35,46,.45); }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.sheet-head h2 { margin: 0; font: 400 26px/1.1 var(--display); letter-spacing: -.01em; text-transform: none; color: var(--ink); }
+.x { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--rule); background: none; color: var(--muted); font-size: 16px; line-height: 1; cursor: pointer; }
+.cform { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
 .cform .full { grid-column: 1 / -1; }
-.field { display: grid; gap: .4rem; }
-.field label { color: var(--mute); }
-.field input, .field textarea { width: 100%; background: transparent; color: var(--ink); border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: .5rem 0; font: 400 1rem/1.4 var(--body); resize: vertical; }
-.field textarea { border: 1px solid var(--ink); padding: .7rem; }
-.field input:focus { outline: none; box-shadow: 0 2px 0 var(--ink); }
-.field textarea:focus { outline: none; box-shadow: inset 0 0 0 1px var(--ink); }
-.field [aria-invalid="true"] { border-color: #b00020; }
-.send { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
-.btn { display: inline-flex; align-items: center; height: 3rem; padding: 0 1.3rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font: 500 .95rem/1 var(--body); text-decoration: none; cursor: pointer; }
-.btn.ghost { background: transparent; color: var(--ink); }
-.status { color: var(--mute); font-size: .92rem; }
-.ready { border: 1px solid var(--ink); padding: 1rem; }
+.field { display: grid; gap: 5px; }
+.field label { font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.field input, .field textarea { width: 100%; padding: 9px 11px; border: 1px solid var(--rule); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 15px/1.4 var(--body); resize: vertical; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--navy); background: var(--surface); }
+.field [aria-invalid="true"] { border-color: #B3261E; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.note { margin: 0; color: var(--mute); font-size: .85rem; }
+.note { font-size: 12px; color: var(--muted); }
+.send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.btn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border: 1px solid var(--navy); border-radius: 999px; background: var(--navy); color: var(--surface); font: 600 13.5px/1 var(--body); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--navy); }
 .btn[disabled] { opacity: .6; cursor: progress; }
-.ready .acts { margin-top: .9rem; display: flex; flex-wrap: wrap; gap: .6rem; }
-@media (max-width: 520px) { .cform { grid-template-columns: minmax(0, 1fr); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+.box { padding: 14px 16px; border: 1px solid var(--rule); border-radius: 12px; font-size: 14px; }
+.box .acts { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 1024px) { .idb { padding: 22px 28px 26px; } .links { padding: 26px 26px 22px; } }
+@media (max-width: 860px) {
+  .page { align-items: start; padding: 48px 16px 24px; }
+  .card { grid-template-columns: minmax(0, 1fr); }
+  .id { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .idb { padding: 22px 22px 24px; }
+  .links { padding: 24px 22px 20px; }
+  h1 { font-size: 32px; }
+  .row { padding-top: 9px; padding-bottom: 9px; }
+}
+@media (max-width: 520px) { .cform { grid-template-columns: 1fr; } .sheet { padding: 22px 20px; } }
+@media (max-width: 420px) { .page { padding: 46px 0 0; } .card { border-radius: 20px 20px 0 0; border-left: 0; border-right: 0; } .band { aspect-ratio: 16 / 7; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
+<div class="tools">
+  <div class="lang">
+    <button class="tb" type="button" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" data-i18n-aria="lang" aria-label="Idioma"><span id="langCode">PT</span></button>
+    <ul class="lang-menu" id="langMenu" hidden>
+      <li><button type="button" data-lang="pt" lang="pt-BR">Português <span>PT</span></button></li>
+      <li><button type="button" data-lang="en" lang="en">English <span>EN</span></button></li>
+      <li><button type="button" data-lang="es" lang="es">Español <span>ES</span></button></li>
+    </ul>
+  </div>
+  <button class="tb" type="button" data-invert aria-pressed="false" data-i18n-aria="invert" aria-label="Inverter cores"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
+</div>
+
 <div class="page">
-  <header class="bar">
-    <div class="in">
-      <span class="brand">Querino Neto</span>
-      <div class="tools">
-        <div class="lang">
-          <button class="icon-btn lang-btn" type="button" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" data-i18n-aria="lang" data-i18n-title="lang" aria-label="Idioma" title="Idioma"><span id="langCode">PT</span></button>
-          <ul class="lang-menu" id="langMenu" hidden>
-            <li><button type="button" data-lang="pt" lang="pt-BR">Português <span>PT</span></button></li>
-            <li><button type="button" data-lang="en" lang="en">English <span>EN</span></button></li>
-            <li><button type="button" data-lang="es" lang="es">Español <span>ES</span></button></li>
-          </ul>
-        </div>
-        <button class="icon-btn" type="button" data-invert aria-pressed="false" data-i18n-aria="invert" data-i18n-title="invert" aria-label="Inverter cores" title="Inverter cores">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
-        </button>
+  <main class="card">
+    <section class="id">
+      <div class="band">
+        <img src="assets/retrato.webp" data-i18n-alt="alt" alt="Retrato de José Querino de Macêdo Neto" width="1000" height="1250">
+        <button class="qlogo" type="button" data-i18n-aria="logoPlay" aria-label="Logotipo Q: toque ou deslize para girar"><span class="coin"><svg viewBox="240 185 1350 1610" aria-hidden="true"><path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></svg></span></button>
       </div>
-    </div>
-  </header>
-
-  <main class="main">
-    <div class="copy">
-      <h1 data-i18n-html="h1">Olá,<br>eu sou Querino!</h1>
-      <p class="lead" data-i18n="lead">Advogado com especialização em Regulação e Governança (UFAL), Argumentação e Justiça (UFRGS), Turismo e Desenvolvimento (UNIRIO) e Cultura Popular Brasileira (URCA).</p>
-      <p class="oab mono">OAB/AL nº 20.662</p>
-      <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
-        <button class="lk primary" type="button" id="openForm"><span data-i18n="open">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button>
-        <div class="social">
-          <a class="ico" href="https://wa.me/5582987036738" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
-          <button class="ico" type="button" id="copyMail" data-i18n-aria="copyMail" aria-label="Copiar e-mail: contato@querinoneto.com.br" title="contato@querinoneto.com.br"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15"/><path d="M2.5 5.5 12 13l9.5-7.5"/></svg></button>
-          <a class="ico" href="https://www.instagram.com/querinoneto/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></a>
-          <a class="ico" href="https://x.com/querinoneto" target="_blank" rel="noopener" data-i18n-aria="x" aria-label="X (antigo Twitter)" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
-          <a class="ico" href="https://www.linkedin.com/in/querinoneto/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <div class="idb">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrow">Advocacia e pesquisa</p>
+          <h1>Querino <em>Neto</em></h1>
         </div>
-      </nav>
-      <p class="status" id="mstatus" role="status" aria-live="polite"></p>
-    </div>
-
-    <div class="visual">
-      <div class="haze" aria-hidden="true"></div>
-      <div class="frame">
-        <img class="portrait" data-i18n-alt="alt" src="assets/retrato.webp" alt="Retrato de José Querino de Macêdo Neto" width="1000" height="1250">
-        <div class="veil" aria-hidden="true"></div>
-        <button class="hero-logo" type="button" data-i18n-aria="logoPlay" data-i18n-title="logoPlay" aria-label="Logotipo Q: toque ou deslize para girar" title="Toque ou deslize para girar">
-          <span class="coin">
-            <svg viewBox="240 185 1350 1610" role="img" data-i18n-aria="logo" aria-label="Logotipo: letra Q em blocos">
-              <path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/>
-              <g class="tail"><g class="tail-in"><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></g></g>
-            </svg>
-          </span>
-        </button>
+        <p class="bio" data-i18n="bio">Advogado e Presidente da Liga Brasileira de Esperanto.</p>
+        <div class="creds">
+          <p><b data-i18n="spec">Especialista</b> · <span data-i18n="specList">Regulação e Governança (UFAL) · Argumentação e Justiça (UFRGS) · Turismo e Desenvolvimento (UNIRIO) · Cultura Popular Brasileira (URCA)</span></p>
+          <p><b>OAB/AL</b> · nº 20.662</p>
+        </div>
+        <div class="contact">
+          <div class="mail">
+            <a href="mailto:contato@querinoneto.com.br">contato@querinoneto.com.br</a>
+            <button class="pill" type="button" id="copyMail" data-i18n="copy">Copiar</button>
+            <button class="pill" type="button" id="openForm" data-i18n="write">Escrever</button>
+          </div>
+          <div class="socials">
+            <a class="soc" href="https://wa.me/5582987036738" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+            <a class="soc" href="https://www.instagram.com/querinoneto/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></a>
+            <a class="soc" href="https://x.com/querinoneto" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+            <a class="soc" href="https://www.linkedin.com/in/querinoneto/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+          <p class="status" id="mstatus" role="status" aria-live="polite"></p>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <nav class="links" data-i18n-aria="links" aria-label="Links">
+      <div>
+        <h2 data-i18n="g1">Onde atuo</h2>
+        <ul>
+          <li><a class="row" href="#contato" style="--c:var(--ink);--fg:var(--surface)" data-open-form><span class="logo"><svg viewBox="240 185 1350 1610" aria-hidden="true"><path d="M247 193H1581V1080L1272 1389V317H552V1593H1070L947 1716H247Z"/><path d="M771 1225H1071L1582 1785H1276L767 1230Z"/></svg></span><span class="t"><span class="nm" data-i18n="law">Advocacia</span><span class="ds">OAB/AL nº 20.662</span></span><span class="arr" aria-hidden="true">→</span></a></li>
+          <li><a class="row pend" href="#" style="--c:#1E8A3C"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.7l7.1-.6z"/></svg></span><span class="t"><span class="nm">Liga Brasileira de Esperanto</span><span class="ds" data-i18n="pres">Presidente</span></span><span class="arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="g2">Minhas iniciativas</h2>
+        <ul>
+          <li><a class="row pend" href="#" style="--c:#64707A"><span class="logo"><b>+</b></span><span class="t"><span class="nm" data-i18n="init">Iniciativa</span><span class="ds" data-i18n="tbd">a definir</span></span><span class="arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="g3">Minha produção</h2>
+        <ul>
+          <li><a class="row pend" href="#" style="--c:var(--ink);--fg:var(--surface)"><span class="logo"><b>A</b></span><span class="t"><span class="nm" data-i18n="arts">Meus artigos</span><span class="ds" data-i18n="tbd">a definir</span></span><span class="arr" aria-hidden="true">→</span></a></li>
+          <li><a class="row pend" href="#" style="--c:#2F5E8C"><span class="logo"><b>L</b></span><span class="t"><span class="nm" data-i18n="lattes">Currículo Lattes</span><span class="ds" data-i18n="pending">link pendente</span></span><span class="arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </nav>
   </main>
 </div>
 
@@ -376,277 +369,179 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mtitle">
     <div class="sheet-head"><h2 id="mtitle" data-i18n="mtitle">Fale comigo</h2><button class="x" type="button" id="closeForm" data-i18n-aria="close" aria-label="Fechar">×</button></div>
     <form class="cform" id="cform" novalidate>
-      <div class="field"><label for="f-nome" class="mono" data-i18n="name">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required></div>
-      <div class="field"><label for="f-tel" class="mono" data-i18n="phone">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" data-i18n-ph="phonePh" placeholder="(82) 90000-0000"></div>
-      <div class="field full"><label for="f-email" class="mono" data-i18n="email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-      <div class="field full"><label for="f-msg" class="mono" data-i18n="msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" required></textarea></div>
+      <div class="field"><label for="f-nome" data-i18n="name">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-tel" data-i18n="phone">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" data-i18n-ph="phonePh" placeholder="(82) 90000-0000"></div>
+      <div class="field full"><label for="f-email" data-i18n="email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field full"><label for="f-msg" data-i18n="msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" required></textarea></div>
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="full note" data-i18n="note">Seus dados serão usados apenas para responder a esta mensagem.</p>
-      <div class="field full send"><button class="btn" type="submit" id="sendBtn" data-i18n="submit">Enviar mensagem</button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
-      <div class="ready full" id="ready" hidden>
+      <div class="full send"><button class="btn" type="submit" id="sendBtn" data-i18n="submit">Enviar mensagem</button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
+      <div class="box full" id="ready" hidden>
         <p data-i18n="fail">Não foi possível enviar pelo site agora. Abra a mensagem no seu e-mail para enviar, ou copie o texto e mande para contato@querinoneto.com.br.</p>
         <div class="acts"><a class="btn" id="mailgo" href="mailto:contato@querinoneto.com.br" data-i18n="mailgo">Abrir no e-mail</a><button class="btn ghost" type="button" id="copymsg" data-i18n="copymsg">Copiar mensagem</button></div>
       </div>
-      <div class="ready full" id="sent" hidden tabindex="-1">
-        <p data-i18n-html="sent"><strong>Mensagem enviada.</strong> Obrigado pelo contato! Responderei pelo e-mail informado.</p>
-      </div>
+      <div class="box full" id="sent" hidden tabindex="-1"><p data-i18n-html="sent"><strong>Mensagem enviada.</strong> Obrigado pelo contato! Responderei pelo e-mail informado.</p></div>
     </form>
   </div>
 </div>
 
 <script>
 (function () {
-  // Chave pública do Web3Forms (web3forms.com), que encaminha o formulário para contato@querinoneto.com.br.
-  // Enquanto estiver vazia, o formulário oferece abrir a mensagem no e-mail do visitante.
   var WEB3FORMS_KEY = 'ca8b9a68-c47e-4fdf-bf2e-0dea9a92d58a';
   var MAIL = 'contato@querinoneto.com.br';
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Textos em português, inglês e espanhol
   var T = {
-    pt: {
-      html: 'pt-BR', invert: 'Inverter cores', lang: 'Idioma',
-      h1: 'Olá,<br>eu sou Querino!',
-      lead: 'Advogado com especialização em Regulação e Governança (UFAL), Argumentação e Justiça (UFRGS), Turismo e Desenvolvimento (UNIRIO) e Cultura Popular Brasileira (URCA).',
-      links: 'Contato e redes sociais', open: 'Enviar mensagem', copyMail: 'Copiar e-mail: MAIL', x: 'X (antigo Twitter)',
-      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q em blocos', logoPlay: 'Logotipo Q: toque ou deslize para girar',
+    pt: { html: 'pt-BR', invert: 'Inverter cores', lang: 'Idioma', links: 'Links', logoPlay: 'Logotipo Q: toque ou deslize para girar',
+      alt: 'Retrato de José Querino de Macêdo Neto', eyebrow: 'Advocacia e pesquisa',
+      bio: 'Advogado e Presidente da Liga Brasileira de Esperanto.',
+      spec: 'Especialista', specList: 'Regulação e Governança (UFAL) · Argumentação e Justiça (UFRGS) · Turismo e Desenvolvimento (UNIRIO) · Cultura Popular Brasileira (URCA)',
+      copy: 'Copiar', write: 'Escrever', g1: 'Onde atuo', g2: 'Minhas iniciativas', g3: 'Minha produção',
+      law: 'Advocacia', pres: 'Presidente', init: 'Iniciativa', arts: 'Meus artigos', lattes: 'Currículo Lattes', tbd: 'a definir', pending: 'link pendente',
       mtitle: 'Fale comigo', close: 'Fechar', name: 'Nome', phone: 'Telefone', phonePh: '(82) 90000-0000', email: 'E-mail', msg: 'Mensagem',
       note: 'Seus dados serão usados apenas para responder a esta mensagem.', submit: 'Enviar mensagem', sending: 'Enviando…',
       fail: 'Não foi possível enviar pelo site agora. Abra a mensagem no seu e-mail para enviar, ou copie o texto e mande para MAIL.',
-      mailgo: 'Abrir no e-mail', copymsg: 'Copiar mensagem',
-      sent: '<strong>Mensagem enviada.</strong> Obrigado pelo contato! Responderei pelo e-mail informado.',
-      errEmail: 'Informe um e-mail válido.', errFill: 'Preencha nome, e-mail e mensagem.',
-      copied: 'Mensagem copiada.', copyFail: 'Não foi possível copiar.', mailCopied: 'E-mail copiado: MAIL', mailShow: 'E-mail: MAIL',
-      to: 'Para', none: 'não informado', subject: 'Contato pelo site'
-    },
-    en: {
-      html: 'en', invert: 'Invert colors', lang: 'Language',
-      h1: 'Hi,<br>I’m Querino!',
-      lead: 'Lawyer with specializations in Regulation and Governance (UFAL), Argumentation and Justice (UFRGS), Tourism and Development (UNIRIO) and Brazilian Popular Culture (URCA).',
-      links: 'Contact and social media', open: 'Send a message', copyMail: 'Copy email: MAIL', x: 'X (formerly Twitter)',
-      alt: 'Portrait of José Querino de Macêdo Neto', logo: 'Logo: block letter Q', logoPlay: 'Q logo: tap or swipe to spin',
+      mailgo: 'Abrir no e-mail', copymsg: 'Copiar mensagem', sent: '<strong>Mensagem enviada.</strong> Obrigado pelo contato! Responderei pelo e-mail informado.',
+      errEmail: 'Informe um e-mail válido.', errFill: 'Preencha nome, e-mail e mensagem.', copied: 'Mensagem copiada.', copyFail: 'Não foi possível copiar.',
+      mailCopied: 'E-mail copiado.', to: 'Para', none: 'não informado', subject: 'Contato pelo site' },
+    en: { html: 'en', invert: 'Invert colors', lang: 'Language', links: 'Links', logoPlay: 'Q logo: tap or swipe to spin',
+      alt: 'Portrait of José Querino de Macêdo Neto', eyebrow: 'Law and research',
+      bio: 'Lawyer and President of the Brazilian Esperanto League.',
+      spec: 'Specialist', specList: 'Regulation and Governance (UFAL) · Argumentation and Justice (UFRGS) · Tourism and Development (UNIRIO) · Brazilian Popular Culture (URCA)',
+      copy: 'Copy', write: 'Write', g1: 'Where I work', g2: 'My initiatives', g3: 'My work',
+      law: 'Law practice', pres: 'President', init: 'Initiative', arts: 'My articles', lattes: 'Lattes CV', tbd: 'to be defined', pending: 'link pending',
       mtitle: 'Get in touch', close: 'Close', name: 'Name', phone: 'Phone', phonePh: 'Optional', email: 'Email', msg: 'Message',
       note: 'Your details will only be used to reply to this message.', submit: 'Send message', sending: 'Sending…',
       fail: 'The message couldn’t be sent through the site right now. Open it in your email app to send it, or copy the text and send it to MAIL.',
-      mailgo: 'Open in email', copymsg: 'Copy message',
-      sent: '<strong>Message sent.</strong> Thank you for reaching out! I’ll reply to the email you provided.',
-      errEmail: 'Please enter a valid email.', errFill: 'Please fill in your name, email and message.',
-      copied: 'Message copied.', copyFail: 'Couldn’t copy.', mailCopied: 'Email copied: MAIL', mailShow: 'Email: MAIL',
-      to: 'To', none: 'not provided', subject: 'Website contact'
-    },
-    es: {
-      html: 'es', invert: 'Invertir colores', lang: 'Idioma',
-      h1: '¡Hola,<br>soy Querino!',
-      lead: 'Abogado con especialización en Regulación y Gobernanza (UFAL), Argumentación y Justicia (UFRGS), Turismo y Desarrollo (UNIRIO) y Cultura Popular Brasileña (URCA).',
-      links: 'Contacto y redes sociales', open: 'Enviar mensaje', copyMail: 'Copiar correo: MAIL', x: 'X (antes Twitter)',
-      alt: 'Retrato de José Querino de Macêdo Neto', logo: 'Logotipo: letra Q en bloques', logoPlay: 'Logotipo Q: toque o deslice para girar',
+      mailgo: 'Open in email', copymsg: 'Copy message', sent: '<strong>Message sent.</strong> Thank you for reaching out! I’ll reply to the email you provided.',
+      errEmail: 'Please enter a valid email.', errFill: 'Please fill in your name, email and message.', copied: 'Message copied.', copyFail: 'Couldn’t copy.',
+      mailCopied: 'Email copied.', to: 'To', none: 'not provided', subject: 'Website contact' },
+    es: { html: 'es', invert: 'Invertir colores', lang: 'Idioma', links: 'Enlaces', logoPlay: 'Logotipo Q: toque o deslice para girar',
+      alt: 'Retrato de José Querino de Macêdo Neto', eyebrow: 'Abogacía e investigación',
+      bio: 'Abogado y Presidente de la Liga Brasileña de Esperanto.',
+      spec: 'Especialista', specList: 'Regulación y Gobernanza (UFAL) · Argumentación y Justicia (UFRGS) · Turismo y Desarrollo (UNIRIO) · Cultura Popular Brasileña (URCA)',
+      copy: 'Copiar', write: 'Escribir', g1: 'Dónde trabajo', g2: 'Mis iniciativas', g3: 'Mi producción',
+      law: 'Abogacía', pres: 'Presidente', init: 'Iniciativa', arts: 'Mis artículos', lattes: 'Currículum Lattes', tbd: 'por definir', pending: 'enlace pendiente',
       mtitle: 'Hablemos', close: 'Cerrar', name: 'Nombre', phone: 'Teléfono', phonePh: 'Opcional', email: 'Correo electrónico', msg: 'Mensaje',
       note: 'Sus datos se usarán solo para responder a este mensaje.', submit: 'Enviar mensaje', sending: 'Enviando…',
       fail: 'No fue posible enviarlo desde el sitio en este momento. Abra el mensaje en su correo para enviarlo, o copie el texto y envíelo a MAIL.',
-      mailgo: 'Abrir en el correo', copymsg: 'Copiar mensaje',
-      sent: '<strong>Mensaje enviado.</strong> ¡Gracias por escribir! Responderé al correo que indicó.',
-      errEmail: 'Introduzca un correo válido.', errFill: 'Complete su nombre, correo y mensaje.',
-      copied: 'Mensaje copiado.', copyFail: 'No se pudo copiar.', mailCopied: 'Correo copiado: MAIL', mailShow: 'Correo: MAIL',
-      to: 'Para', none: 'no indicado', subject: 'Contacto desde el sitio'
-    }
+      mailgo: 'Abrir en el correo', copymsg: 'Copiar mensaje', sent: '<strong>Mensaje enviado.</strong> ¡Gracias por escribir! Responderé al correo que indicó.',
+      errEmail: 'Introduzca un correo válido.', errFill: 'Complete su nombre, correo y mensaje.', copied: 'Mensaje copiado.', copyFail: 'No se pudo copiar.',
+      mailCopied: 'Correo copiado.', to: 'Para', none: 'no indicado', subject: 'Contacto desde el sitio' }
   };
   var LANG = 'pt';
   function t(k) { return (T[LANG][k] || T.pt[k] || '').replace('MAIL', MAIL); }
-  function store(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function stored(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function each(sel, fn) { [].forEach.call(document.querySelectorAll(sel), fn); }
   function pickLang() {
-    var q = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
-    if (T[q]) return q;
+    var q = (new URLSearchParams(location.search).get('lang') || '').toLowerCase(); if (T[q]) return q;
     var s = stored('lang'); if (T[s]) return s;
-    var nav = (navigator.languages || [navigator.language || 'pt']);
+    var nav = navigator.languages || [navigator.language || 'pt'];
     for (var i = 0; i < nav.length; i++) { var c = String(nav[i]).slice(0, 2).toLowerCase(); if (T[c]) return c; }
     return 'pt';
   }
-  function each(sel, fn) { [].forEach.call(document.querySelectorAll(sel), fn); }
   function setLang(l) {
-    LANG = T[l] ? l : 'pt';
-    root.lang = T[LANG].html;
+    LANG = T[l] ? l : 'pt'; root.lang = T[LANG].html;
     each('[data-i18n]', function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
     each('[data-i18n-html]', function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
     each('[data-i18n-aria]', function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
-    each('[data-i18n-title]', function (el) { el.setAttribute('title', t(el.getAttribute('data-i18n-title'))); });
     each('[data-i18n-alt]', function (el) { el.setAttribute('alt', t(el.getAttribute('data-i18n-alt'))); });
     each('[data-i18n-ph]', function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
     document.getElementById('langCode').textContent = LANG.toUpperCase();
     each('[data-lang]', function (b) { b.setAttribute('aria-current', b.getAttribute('data-lang') === LANG ? 'true' : 'false'); });
   }
   setLang(pickLang());
-
   var langBtn = document.getElementById('langBtn'), langMenu = document.getElementById('langMenu');
   function menu(open) { langMenu.hidden = !open; langBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
-  langBtn.addEventListener('click', function (e) { e.stopPropagation(); menu(langMenu.hidden); if (!langMenu.hidden) langMenu.querySelector('[aria-current="true"]').focus(); });
-  each('[data-lang]', function (b) {
-    b.addEventListener('click', function () {
-      var l = b.getAttribute('data-lang');
-      setLang(l); store('lang', l); menu(false); langBtn.focus();
-      try { var u = new URL(location.href); if (l === 'pt') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u); } catch (e) {}
-    });
-  });
+  langBtn.addEventListener('click', function (e) { e.stopPropagation(); menu(langMenu.hidden); });
+  each('[data-lang]', function (b) { b.addEventListener('click', function () {
+    var l = b.getAttribute('data-lang'); setLang(l); store('lang', l); menu(false);
+    try { var u = new URL(location.href); if (l === 'pt') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u); } catch (e) {}
+  }); });
   document.addEventListener('click', function (e) { if (!langMenu.hidden && !langMenu.contains(e.target)) menu(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !langMenu.hidden) { menu(false); langBtn.focus(); } });
 
+  // Inverter cores (troca a página inteira de uma vez)
   var invBtns = [].slice.call(document.querySelectorAll('[data-invert]'));
-  function setInv(on) {
-    if (on) root.setAttribute('data-inv', ''); else root.removeAttribute('data-inv');
-    invBtns.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-  }
-  setInv(false);
-  function toggleInv() {
-    var on = !root.hasAttribute('data-inv');
-    root.classList.add('no-tr');
-    if (document.startViewTransition && !reduce) {
-      document.startViewTransition(function () { setInv(on); }).finished.finally(function () { root.classList.remove('no-tr'); });
-    } else {
-      setInv(on);
-      requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('no-tr'); }); });
-    }
-  }
-  invBtns.forEach(function (b) { b.addEventListener('click', toggleInv); });
+  function setInv(on) { if (on) root.setAttribute('data-inv', ''); else root.removeAttribute('data-inv'); invBtns.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
+  invBtns.forEach(function (b) { b.addEventListener('click', function () {
+    var on = !root.hasAttribute('data-inv'); root.classList.add('no-tr');
+    if (document.startViewTransition && !reduce) document.startViewTransition(function () { setInv(on); }).finished.finally(function () { root.classList.remove('no-tr'); });
+    else { setInv(on); requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('no-tr'); }); }); }
+  }); });
 
-  // Logotipo interativo: o Q gira como uma moeda. Um toque dá um giro; deslizar para os lados gira com impulso.
-  var logo = document.querySelector('.hero-logo'), coin = logo.querySelector('.coin'), tail = logo.querySelector('.tail');
+  // Logotipo Q que gira como moeda
+  var logo = document.querySelector('.qlogo'), coin = logo.querySelector('.coin');
   var ang = 0, w = 0, drag = null, raf = 0, last = 0;
   function paint() {
     var m = ((ang % 360) + 360) % 360;
-    if (m === 0 && !w && !drag) {                         // em repouso: sem nenhuma transformação
-      coin.classList.remove('spinning', 'flip'); coin.style.removeProperty('--ry'); return;
-    }
-    coin.classList.add('spinning');
-    coin.classList.toggle('flip', m > 90 && m < 270);     // na metade de trás, desvira o desenho para o Q continuar legível
-    coin.style.setProperty('--ry', ang.toFixed(2) + 'deg');
+    if (m === 0 && !w && !drag) { coin.classList.remove('spinning', 'flip'); coin.style.removeProperty('--ry'); return; }
+    coin.classList.add('spinning'); coin.classList.toggle('flip', m > 90 && m < 270); coin.style.setProperty('--ry', ang.toFixed(2) + 'deg');
   }
-  function step(t) {
-    var dt = Math.min(.032, (t - (last || t)) / 1000 || .016); last = t;
+  function step(ts) {
+    var dt = Math.min(.032, (ts - (last || ts)) / 1000 || .016); last = ts;
     if (!drag) {
-      if (Math.abs(w) > 140) {
-        w *= Math.exp(-1.15 * dt);                         // atrito: a moeda vai perdendo velocidade
-        ang += w * dt;
-      } else {
-        var target = Math.round(ang / 180) * 180;          // assenta numa das faces
-        w += (-(ang - target) * 90 - w * 9) * dt;
-        ang += w * dt;
-        if (Math.abs(ang - target) < .2 && Math.abs(w) < 2) {
-          ang = 0; w = 0; paint(); raf = 0; last = 0; return;   // as duas faces são iguais: volta ao estado inicial
-        }
-      }
+      if (Math.abs(w) > 140) { w *= Math.exp(-1.15 * dt); ang += w * dt; }
+      else { var target = Math.round(ang / 180) * 180; w += (-(ang - target) * 90 - w * 9) * dt; ang += w * dt;
+        if (Math.abs(ang - target) < .2 && Math.abs(w) < 2) { ang = 0; w = 0; paint(); raf = 0; last = 0; return; } }
     }
-    paint();
-    raf = requestAnimationFrame(step);
+    paint(); raf = requestAnimationFrame(step);
   }
   function wake() { if (!raf) raf = requestAnimationFrame(step); }
-  function spin(dir) {
-    if (reduce) { ang = 0; w = 0; paint(); return; }
-    var d = dir || (w < 0 ? -1 : 1);
-    w = d * Math.max(Math.abs(w), 0) + d * 1500;
-    if (Math.abs(w) > 4200) w = d * 4200;
-    wake();
-  }
-  logo.addEventListener('pointerdown', function (e) {
-    if (e.button && e.button !== 0) return;
-    drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, a0: ang, moved: false, hist: [] };
-  });
+  function spin() { if (reduce) return; var d = w < 0 ? -1 : 1; w = Math.max(-4200, Math.min(4200, w + d * 1500)); wake(); }
+  logo.addEventListener('pointerdown', function (e) { if (e.button && e.button !== 0) return; drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, a0: ang, moved: false, hist: [] }; });
   logo.addEventListener('pointermove', function (e) {
     if (!drag || e.pointerId !== drag.id) return;
     var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
-    if (!drag.moved) {
-      if (Math.abs(dx) < 6) return;
-      if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; }   // gesto vertical: deixa a página rolar
-      drag.moved = true; w = 0;
-      try { logo.setPointerCapture(e.pointerId); } catch (err) {}
-      logo.classList.add('dragging');
-    }
-    ang = drag.a0 + dx * 1.4;
-    drag.hist.push({ a: ang, t: performance.now() }); if (drag.hist.length > 5) drag.hist.shift();
-    wake();
+    if (!drag.moved) { if (Math.abs(dx) < 6) return; if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; } drag.moved = true; w = 0; try { logo.setPointerCapture(e.pointerId); } catch (err) {} }
+    ang = drag.a0 + dx * 2; drag.hist.push({ a: ang, t: performance.now() }); if (drag.hist.length > 5) drag.hist.shift(); wake();
   });
-  function release(e) {
-    if (!drag || (e && e.pointerId !== drag.id)) return;
-    var d = drag; drag = null; logo.classList.remove('dragging');
+  logo.addEventListener('pointerup', function (e) {
+    if (!drag || e.pointerId !== drag.id) return; var d = drag; drag = null;
     if (!d.moved) { spin(); return; }
-    var h = d.hist;
-    if (h.length > 1) { var a = h[0], b = h[h.length - 1], dt = (b.t - a.t) / 1000 || .016; w = Math.max(-4200, Math.min(4200, (b.a - a.a) / dt)); }
-    if (reduce) { ang = 0; w = 0; paint(); return; }
-    wake();
-  }
-  logo.addEventListener('pointerup', release);
-  logo.addEventListener('pointercancel', function () { if (drag) { drag = null; logo.classList.remove('dragging'); wake(); } });
-  logo.addEventListener('click', function (e) { if (e.detail === 0) spin(); });   // teclado (Enter/Espaço)
-  // No computador, a perna do Q continua seguindo o mouse de leve
-  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
-    document.addEventListener('pointermove', function (e) {
-      var px = e.clientX / window.innerWidth - .5, py = e.clientY / window.innerHeight - .5;
-      tail.style.setProperty('--tx', (px * 80).toFixed(1) + 'px');
-      tail.style.setProperty('--ty', (py * 80).toFixed(1) + 'px');
-    });
-  }
-
-  function copy(text, cb) {
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { cb(true); }, function () { cb(false); });
-    else cb(false);
-  }
-  var ms = document.getElementById('mstatus');
-  document.getElementById('copyMail').addEventListener('click', function () {
-    copy('contato@querinoneto.com.br', function (ok) {
-      ms.textContent = ok ? t('mailCopied') : t('mailShow');
-      setTimeout(function () { ms.textContent = ''; }, 4000);
-    });
+    var h = d.hist; if (h.length > 1) { var a = h[0], b = h[h.length - 1], dt = (b.t - a.t) / 1000 || .016; w = Math.max(-4200, Math.min(4200, (b.a - a.a) / dt)); }
+    if (reduce) { ang = 0; w = 0; paint(); return; } wake();
   });
+  logo.addEventListener('pointercancel', function () { if (drag) { drag = null; wake(); } });
+  logo.addEventListener('click', function (e) { if (e.detail === 0) spin(); });
 
-  var modal = document.getElementById('modal'), opener = document.getElementById('openForm');
-  function openM() { modal.hidden = false; document.getElementById('sent').hidden = true; setTimeout(function () { document.getElementById('f-nome').focus(); }, 30); }
-  function closeM() { modal.hidden = true; opener.focus(); }
-  opener.addEventListener('click', openM);
+  // Copiar e-mail
+  function copy(text, cb) { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { cb(true); }, function () { cb(false); }); else cb(false); }
+  var ms = document.getElementById('mstatus'), cbtn = document.getElementById('copyMail');
+  cbtn.addEventListener('click', function () { copy(MAIL, function (ok) { if (!ok) return; cbtn.textContent = t('mailCopied'); setTimeout(function () { cbtn.textContent = t('copy'); }, 2200); }); });
+
+  // Formulário de mensagem
+  var modal = document.getElementById('modal'), lastOpener = null;
+  function openM(e) { if (e) e.preventDefault(); lastOpener = document.activeElement; modal.hidden = false; document.getElementById('sent').hidden = true; setTimeout(function () { document.getElementById('f-nome').focus(); }, 30); }
+  function closeM() { modal.hidden = true; if (lastOpener) lastOpener.focus(); }
+  document.getElementById('openForm').addEventListener('click', openM);
+  each('[data-open-form]', function (a) { a.addEventListener('click', openM); });
   document.getElementById('closeForm').addEventListener('click', closeM);
   modal.addEventListener('click', function (e) { if (e.target === modal) closeM(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeM(); });
-
+  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (!modal.hidden) closeM(); else if (!langMenu.hidden) menu(false); });
   var cf = document.getElementById('cform'), fst = document.getElementById('fstatus'), ready = document.getElementById('ready'), composed = '';
   cf.addEventListener('submit', function (e) {
     e.preventDefault();
     var nome = cf.nome, tel = cf.telefone, mail = cf.email, msg = cf.mensagem, bad = null;
     [nome, mail, msg].forEach(function (f) { f.removeAttribute('aria-invalid'); });
-    if (!nome.value.trim()) bad = nome;
-    else if (!/^\S+@\S+\.\S+$/.test(mail.value.trim())) bad = mail;
-    else if (!msg.value.trim()) bad = msg;
+    if (!nome.value.trim()) bad = nome; else if (!/^\S+@\S+\.\S+$/.test(mail.value.trim())) bad = mail; else if (!msg.value.trim()) bad = msg;
     if (bad) { bad.setAttribute('aria-invalid', 'true'); bad.focus(); fst.textContent = bad === mail ? t('errEmail') : t('errFill'); return; }
-    fst.textContent = '';
-    ready.hidden = true;
+    fst.textContent = ''; ready.hidden = true;
     composed = t('name') + ': ' + nome.value.trim() + '\n' + t('phone') + ': ' + (tel.value.trim() || t('none')) + '\n' + t('email') + ': ' + mail.value.trim() + '\n\n' + msg.value.trim();
-    document.getElementById('mailgo').href = 'mailto:contato@querinoneto.com.br?subject=' + encodeURIComponent(t('subject') + ': ' + nome.value.trim()) + '&body=' + encodeURIComponent(composed);
+    document.getElementById('mailgo').href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(t('subject') + ': ' + nome.value.trim()) + '&body=' + encodeURIComponent(composed);
     if (cf.botcheck.checked) return;
-    var btn = document.getElementById('sendBtn');
-    btn.disabled = true; fst.textContent = t('sending');
+    var btn = document.getElementById('sendBtn'); btn.disabled = true; fst.textContent = t('sending');
     function falhou() { btn.disabled = false; fst.textContent = ''; ready.hidden = false; }
-    if (!WEB3FORMS_KEY) { falhou(); return; }
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject: 'Contato pelo site' + (LANG === 'pt' ? '' : ' [' + LANG.toUpperCase() + ']') + ': ' + nome.value.trim(),
-        from_name: 'Site querinoneto.com.br',
-        name: nome.value.trim(),
-        email: mail.value.trim(),
-        telefone: tel.value.trim() || 'não informado',
-        idioma: LANG,
-        message: msg.value.trim()
-      })
+    fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: 'Contato pelo site' + (LANG === 'pt' ? '' : ' [' + LANG.toUpperCase() + ']') + ': ' + nome.value.trim(),
+        from_name: 'Site querinoneto.com.br', name: nome.value.trim(), email: mail.value.trim(), telefone: tel.value.trim() || 'não informado', idioma: LANG, message: msg.value.trim() })
     }).then(function (r) { return r.json(); }).then(function (d) {
       if (!d || !d.success) throw new Error('falha');
-      btn.disabled = false; fst.textContent = '';
-      cf.reset();
-      var sent = document.getElementById('sent'); sent.hidden = false; sent.focus();
+      btn.disabled = false; fst.textContent = ''; cf.reset(); var sent = document.getElementById('sent'); sent.hidden = false; sent.focus();
     }).catch(falhou);
   });
-  document.getElementById('copymsg').addEventListener('click', function () {
-    copy(t('to') + ': ' + MAIL + '\n\n' + composed, function (ok) { fst.textContent = ok ? t('copied') : t('copyFail'); });
-  });
+  document.getElementById('copymsg').addEventListener('click', function () { copy(t('to') + ': ' + MAIL + '\n\n' + composed, function (ok) { fst.textContent = ok ? t('copied') : t('copyFail'); }); });
 })();
 </script>
 </body>
