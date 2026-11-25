@@ -345,6 +345,41 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
   h1.name { font-size: clamp(2.1rem, 9vw, 2.6rem); }
   .creds { font-size: .92rem; gap: .35rem; }
 }
+
+/* Janela de mensagem na identidade nova: moldura arredondada como o cartão, borda fina, sombra suave */
+.modal { background: rgba(17, 17, 17, .28); -webkit-backdrop-filter: blur(8px) saturate(1.1); backdrop-filter: blur(8px) saturate(1.1); }
+:root[data-inv] .modal { background: rgba(0, 0, 0, .55); }
+.sheet { width: min(100%, 36rem); border: 1px solid var(--line); border-radius: 20px; padding: clamp(1.4rem, 3.5vw, 2.1rem); box-shadow: 0 30px 70px -30px rgba(17, 17, 17, .45); animation: up .28s cubic-bezier(.2, .7, .2, 1) both; }
+:root[data-inv] .sheet { box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .9); }
+@keyframes up { from { transform: translateY(14px) scale(.985); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet-head { align-items: flex-start; margin-bottom: 1.4rem; }
+.sheet-head h2 { font: 800 clamp(1.7rem, 3.4vw, 2.1rem)/1 var(--display); letter-spacing: -.04em; }
+.x { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2.25rem; height: 2.25rem; border: 1px solid var(--ink); background: none; color: var(--ink); transition: background-color .2s ease, color .2s ease; }
+.x svg { width: .85rem; height: .85rem; }
+@media (hover: hover) { .x:hover { background: var(--ink); color: var(--paper); } }
+.cform { gap: .9rem 1rem; }
+.field { gap: .35rem; }
+.field label { font: 600 .72rem/1.2 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
+.field input, .field textarea { border: 1px solid var(--line); border-radius: 0; background: var(--paper); padding: .75rem .85rem; font: 400 1rem/1.4 var(--body); transition: border-color .15s ease, box-shadow .15s ease; }
+.field textarea { min-height: 7.5rem; padding: .75rem .85rem; border: 1px solid var(--line); }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--mute) 70%, transparent); }
+.field input:hover, .field textarea:hover { border-color: color-mix(in srgb, var(--ink) 35%, var(--line)); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.field [aria-invalid="true"] { border-color: #b3261e; box-shadow: inset 0 0 0 1px #b3261e; }
+.note { font-size: .8rem; line-height: 1.45; }
+.send { display: grid; gap: .6rem; }
+.btn.submit { width: 100%; justify-content: space-between; gap: .75rem; height: 3rem; padding: 0 1rem; font: 500 .95rem/1 var(--body); transition: background-color .2s ease, color .2s ease; }
+.btn.submit .ar { font-family: var(--mono); font-size: .8rem; transition: transform .2s ease; }
+@media (hover: hover) { .btn.submit:hover:not([disabled]) { background: transparent; color: var(--ink); } .btn.submit:hover .ar { transform: translateX(3px); } }
+.status:empty { display: none; }
+.ready { border: 1px solid var(--line); background: color-mix(in srgb, var(--line) 22%, var(--paper)); padding: 1rem 1.1rem; font-size: .95rem; line-height: 1.5; }
+#sent { border-color: color-mix(in srgb, #2e7d32 45%, var(--line)); }
+@media (max-width: 520px) {
+  .modal { padding: .75rem; align-items: end; }
+  .sheet { width: 100%; max-height: calc(100dvh - 1.5rem); padding: 1.3rem 1.15rem 1.2rem; }
+  .cform { gap: .8rem; }
+  .field textarea { min-height: 6.5rem; }
+}
 </style>
 </head>
 <body>
@@ -403,7 +438,7 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
 
 <div class="modal" id="modal" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mtitle">
-    <div class="sheet-head"><h2 id="mtitle" data-i18n="mtitle">Fale comigo</h2><button class="x" type="button" id="closeForm" data-i18n-aria="close" aria-label="Fechar">×</button></div>
+    <div class="sheet-head"><h2 id="mtitle" data-i18n="mtitle">Fale comigo</h2><button class="x" type="button" id="closeForm" data-i18n-aria="close" aria-label="Fechar"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></button></div>
     <form class="cform" id="cform" novalidate>
       <div class="field"><label for="f-nome" class="mono" data-i18n="name">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required></div>
       <div class="field"><label for="f-tel" class="mono" data-i18n="phone">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" data-i18n-ph="phonePh" placeholder="(82) 90000-0000"></div>
@@ -411,7 +446,7 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
       <div class="field full"><label for="f-msg" class="mono" data-i18n="msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" required></textarea></div>
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="full note" data-i18n="note">Seus dados serão usados apenas para responder a esta mensagem.</p>
-      <div class="field full send"><button class="btn" type="submit" id="sendBtn" data-i18n="submit">Enviar mensagem</button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
+      <div class="field full send"><button class="btn submit" type="submit" id="sendBtn"><span data-i18n="submit">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button><span class="status" id="fstatus" role="status" aria-live="polite"></span></div>
       <div class="ready full" id="ready" hidden>
         <p data-i18n="fail">Não foi possível enviar pelo site agora. Abra a mensagem no seu e-mail para enviar, ou copie o texto e mande para contato@querinoneto.com.br.</p>
         <div class="acts"><a class="btn" id="mailgo" href="mailto:contato@querinoneto.com.br" data-i18n="mailgo">Abrir no e-mail</a><button class="btn ghost" type="button" id="copymsg" data-i18n="copymsg">Copiar mensagem</button></div>
