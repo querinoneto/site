@@ -194,7 +194,7 @@
 <meta name="twitter:image" content="https://querinoneto.com.br/assets/compartilhar.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* Plano: cartão de visita de uma tela só, branco e preto do logotipo.
    Layout: retrato esfumaçado + saudação + links, tudo visível sem rolar. */
@@ -394,8 +394,9 @@ h1.name { font: 800 clamp(2.1rem, 3.4vw, 3.1rem)/1 var(--display); letter-spacin
   .copy .links .social { flex: none; }
 }
 
-/* Tipografia: duas famílias apenas — Newsreader itálico para títulos, Archivo para todo o resto */
-:root { --serif: "Newsreader", Georgia, "Times New Roman", serif; }
+/* Tipografia: duas famílias apenas — serifada (Iowan Old Style/Georgia) nos títulos, Archivo no resto */
+/* Mesma sequência de fontes do nome em jordao.com.br: Iowan Old Style nos aparelhos Apple, Georgia nos demais */
+:root { --serif: "Iowan Old Style", "Iowan", Georgia, "Times New Roman", serif; }
 h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); letter-spacing: -.015em; }
 .sheet-head h2 { font: italic 400 clamp(1.9rem, 3.4vw, 2.3rem)/1.05 var(--serif); letter-spacing: -.01em; }
 /* Sem a linha entre o nome e os dados, com espaçamento mais justo */
@@ -421,7 +422,11 @@ h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); lette
 }
 
 /* Títulos: primeira palavra em negrito vertical, segunda em itálico */
-h1.name b, .sheet-head h2 b { font-style: normal; font-weight: 700; }
+h1.name, .sheet-head h2 { font-weight: 400; }
+/* Primeira palavra levemente encorpada; segunda em itálico e cinza */
+h1.name b, .sheet-head h2 b { font-style: normal; font-weight: 400; -webkit-text-stroke: .022em currentColor; paint-order: stroke fill; }
+h1.name, .sheet-head h2 { color: #5a5a5a; }
+h1.name b, .sheet-head h2 b { color: var(--ink); }
 /* Separador discreto entre cargo e instituição */
 .creds .dot { display: inline-block; margin: 0 .1em; white-space: pre; color: color-mix(in srgb, var(--mute) 70%, transparent); font-weight: 700; transform: translateY(-.02em); }
 </style>
