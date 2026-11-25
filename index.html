@@ -250,24 +250,21 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 /* Retrato esfumaçado */
 .visual { position: relative; min-height: 0; overflow: hidden; background: var(--line); }
 .visual picture, .visual img { display: block; width: 100%; height: 100%; }
-.visual img { object-fit: cover; object-position: 50% 8%; }
+.visual img { object-fit: cover; object-position: 50% 50%; }
 :root[data-inv] .visual img { filter: brightness(.9); }
 /* Em repouso o Q não tem transformação 3D; ela só existe enquanto gira */
 
-/* Computador: foto em faixa no topo; abaixo, título à esquerda e texto à direita */
+/* Computador: texto à esquerda e a foto inteira, na horizontal, à direita */
 @media (min-width: 861px) {
-  .main { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(12rem, 1fr) auto; align-content: start; gap: clamp(1.5rem, 4vh, 2.75rem); padding-top: clamp(1rem, 3vh, 1.75rem); padding-bottom: clamp(1rem, 3vh, 2rem); }
-  .visual { order: -1; height: 100%; max-height: 36rem; }
-  .copy { align-self: start; padding: 0; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
-  .copy h1 { grid-column: 1; grid-row: 1 / span 4; }
-  .copy .lead, .copy .oab, .copy .links, .copy .status { grid-column: 2; }
-  .copy .lead { margin-top: .35rem; }
+  .main { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
+  .copy { padding: 0; }
+  h1 { font-size: clamp(2.4rem, 4.4vw, 4.2rem); }
+  .visual { aspect-ratio: 1600 / 871; width: 100%; height: auto; max-height: calc(100dvh - var(--hh) - 3rem); }
 }
 /* Celular: foto ocupa o espaço que sobrar */
 @media (max-width: 860px) {
   .main { display: flex; flex-direction: column; gap: 0; }
-  .visual { order: -1; flex: 1 1 auto; min-height: 62vw; max-height: 86vw; margin-inline: calc(-1 * var(--gutter)); }
-  .visual img { object-position: 50% 12%; }
+  .visual { order: -1; flex: none; aspect-ratio: 1600 / 871; margin-inline: calc(-1 * var(--gutter)); }
   .copy { flex: none; padding: 1.25rem 0 max(1.25rem, env(safe-area-inset-bottom)); }
   h1 { font-size: clamp(2.1rem, 10vw, 2.9rem); }
   :root { --gutter: 1rem; }
