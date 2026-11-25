@@ -317,20 +317,15 @@ body { background: var(--page); }
   .copy { padding: 1.1rem 1.25rem 1.25rem; }
   .copy .lead { font-size: clamp(.7rem, 3.2vw, 1rem); }
 }
-/* Celular: sem a barra do topo; idioma e inverter cores flutuam sobre a foto */
+/* Celular: sem nome no topo; idioma e inverter cores centralizados acima da foto */
 @media (max-width: 860px) {
-  .page { position: relative; }
-  .bar { position: absolute; top: 0; left: 0; right: 0; z-index: 20; height: auto; border-bottom: 0; pointer-events: none; }
-  .bar .in { justify-content: flex-end; padding: 1.5rem calc(var(--gutter) + .75rem) 0; }
+  .bar { height: auto; border-bottom: 0; }
+  .bar .in { justify-content: center; padding: .75rem var(--gutter) .5rem; }
   .brand { display: none; }
-  .tools { pointer-events: auto; gap: .4rem; }
-  .bar .icon-btn { width: 2.1rem; height: 2.1rem; border-color: transparent; border-radius: 999px; background: rgba(255, 255, 255, .85); color: #232323; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 2px 10px rgba(0, 0, 0, .12); }
-  :root[data-inv] .bar .icon-btn { background: rgba(28, 28, 28, .78); color: #fefefe; }
-  .lang-menu { border-radius: 12px; overflow: hidden; }
 }
 @media (max-width: 420px) {
   .main { padding: 0; }
-  .card { border-radius: 20px 20px 0 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; min-height: calc(100dvh - .5rem); align-content: start; }
+  .card { border-radius: 20px 20px 0 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; min-height: calc(100dvh - 4rem); align-content: start; }
   .bar .in { padding: 1.25rem .75rem 0; }
   .main { padding-top: .5rem; }
   .idb { padding: 1rem var(--gutter) 1.1rem; }
@@ -380,12 +375,6 @@ h1.name em { font-style: italic; }
         </div>
       </div>
       <div class="copy">
-      <div class="creds">
-        <p><b data-i18n="r1">Presidente</b> • <span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
-        <p><b data-i18n="r2">Secretário Executivo</b> • <span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
-        <p><b data-i18n="r3">Advogado</b> • <span data-i18n="o3">Direito Civil, Direito Administrativo e Direito Eleitoral</span></p>
-        <p><b data-i18n="r4">Pesquisador</b> • <span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
-      </div>
       <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
         <button class="lk primary" type="button" id="openForm"><span data-i18n="open">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button>
         <div class="social">
