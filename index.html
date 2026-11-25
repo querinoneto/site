@@ -220,7 +220,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 h1 { font: 400 30.4px/1 var(--display); letter-spacing: -.015em; color: var(--ink); }
 h1 em { color: var(--navy); }
 .bio { font-size: 15.2px; color: var(--ink); }
-.creds { display: grid; gap: 4px; font-size: 13.12px; line-height: 1.45; color: var(--muted); }
+.creds { font-size: 13.12px; line-height: 1.6; color: var(--muted); }
+.creds .sep { color: var(--muted); opacity: .55; }
 .creds b { color: var(--ink); }
 .contact { align-self: end; display: grid; gap: 12px; padding-top: 16px; border-top: 1px solid var(--rule); }
 .mail { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -307,14 +308,7 @@ h2 { margin: 0 0 4px; font: 600 9.6px/1.5 var(--body); letter-spacing: .13em; te
       </div>
       <div class="idb">
         <h1>Querino <em>Neto</em></h1>
-        <div class="creds">
-          <p><b data-i18n="r1">Presidente</b> • <span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
-          <p><b data-i18n="r2">Secretário Executivo</b> • <span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
-          <p><b data-i18n="r3">Advogado</b> • <span data-i18n="o3">Direito Civil e Direito Administrativo</span></p>
-          <p><b data-i18n="r4">Pesquisador</b> • <span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
-          <p><b data-i18n="r5">Diretor-geral</b> • <span data-i18n="o5">Tribuna Socialista</span></p>
-          <p><b>OAB/AL</b> • nº 20.662</p>
-        </div>
+        <p class="creds"><span class="cr"><b data-i18n="r1">Presidente</b> • <span data-i18n="o1">Liga Brasileira de Esperanto</span></span><span class="sep" aria-hidden="true"> | </span><span class="cr"><b data-i18n="r2">Secretário Executivo</b> • <span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></span><span class="sep" aria-hidden="true"> | </span><span class="cr"><b data-i18n="r3">Advogado</b> • <span data-i18n="o3">Direito Civil e Direito Administrativo</span></span><span class="sep" aria-hidden="true"> | </span><span class="cr"><b data-i18n="r4">Pesquisador</b> • <span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></span><span class="sep" aria-hidden="true"> | </span><span class="cr"><b data-i18n="r5">Diretor-geral</b> • <span data-i18n="o5">Tribuna Socialista</span></span></p>
         <div class="contact">
           <div class="mail">
             <a href="mailto:contato@querinoneto.com.br">contato@querinoneto.com.br</a>
