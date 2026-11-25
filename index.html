@@ -294,7 +294,7 @@ h1 { font: 800 clamp(2.4rem, 5.6vw, 4.6rem)/.98 var(--display); letter-spacing: 
 
 /* Moldura em cartão (estrutura inspirada em jordao.com.br): cartão com cantos arredondados,
    borda fina e sombra suave; foto inteira no topo da coluna esquerda; linha dividindo as colunas */
-:root { --page: #f3f3f1; }
+:root { --page: #ffffff; }
 :root[data-inv] { --page: #1a1a1a; }
 body { background: var(--page); }
 .page { height: auto; min-height: 100dvh; overflow: visible; }
@@ -324,12 +324,9 @@ body { background: var(--page); }
   .brand { display: none; }
 }
 @media (max-width: 420px) {
-  .main { padding: 0; }
-  .card { border-radius: 20px 20px 0 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; min-height: calc(100dvh - 4rem); align-content: start; }
-  .bar .in { padding: 1.25rem .75rem 0; }
-  .main { padding-top: .5rem; }
-  .idb { padding: 1rem var(--gutter) 1.1rem; }
-  .copy { padding: 1rem var(--gutter) max(1.25rem, env(safe-area-inset-bottom)); }
+  .main { padding: 0 .75rem .75rem; }
+  .idb { padding: .9rem 1.1rem 1rem; }
+  .copy { padding: 1rem 1.1rem 1.15rem; }
 }
 
 /* Texto no formato combinado: nome em serifa e cargos um por linha */
@@ -375,6 +372,12 @@ h1.name em { font-style: italic; }
         </div>
       </div>
       <div class="copy">
+      <div class="creds">
+        <p><b data-i18n="r1">Presidente</b> • <span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
+        <p><b data-i18n="r2">Secretário Executivo</b> • <span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
+        <p><b data-i18n="r3">Advogado</b> • <span data-i18n="o3">OAB/AL nº 20.662</span></p>
+        <p><b data-i18n="r4">Pesquisador</b> • <span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
+      </div>
       <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
         <button class="lk primary" type="button" id="openForm"><span data-i18n="open">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button>
         <div class="social">
@@ -425,7 +428,7 @@ h1.name em { font-style: italic; }
   // Textos em português, inglês e espanhol
   var T = {
     pt: {
-      r1: 'Presidente', o1: 'Liga Brasileira de Esperanto', r2: 'Secretário Executivo', o2: 'Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas', r3: 'Advogado', o3: 'Direito Civil, Direito Administrativo e Direito Eleitoral', r4: 'Pesquisador', o4: 'Regulação, Contratos e Infraestrutura',
+      r1: 'Presidente', o1: 'Liga Brasileira de Esperanto', r2: 'Secretário Executivo', o2: 'Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas', r3: 'Advogado', o3: 'OAB/AL nº 20.662', r4: 'Pesquisador', o4: 'Regulação, Contratos e Infraestrutura',
       html: 'pt-BR', invert: 'Inverter cores', lang: 'Idioma',
       h1: 'Olá,<br>eu sou Querino!',
       lead: 'Advogado com especialização em Regulação e Governança (UFAL), Argumentação e Justiça (UFRGS), Turismo e Desenvolvimento (UNIRIO) e Cultura Popular Brasileira (URCA).',
@@ -441,7 +444,7 @@ h1.name em { font-style: italic; }
       to: 'Para', none: 'não informado', subject: 'Contato pelo site'
     },
     en: {
-      r1: 'President', o1: 'Brazilian Esperanto League', r2: 'Executive Secretary', o2: 'Alagoas State Department of Environment and Water Resources', r3: 'Lawyer', o3: 'Civil Law, Administrative Law and Electoral Law', r4: 'Researcher', o4: 'Regulation, Contracts and Infrastructure',
+      r1: 'President', o1: 'Brazilian Esperanto League', r2: 'Executive Secretary', o2: 'Alagoas State Department of Environment and Water Resources', r3: 'Lawyer', o3: 'OAB/AL nº 20.662', r4: 'Researcher', o4: 'Regulation, Contracts and Infrastructure',
       html: 'en', invert: 'Invert colors', lang: 'Language',
       h1: 'Hi,<br>I’m Querino!',
       lead: 'Lawyer with specializations in Regulation and Governance (UFAL), Argumentation and Justice (UFRGS), Tourism and Development (UNIRIO) and Brazilian Popular Culture (URCA).',
@@ -457,7 +460,7 @@ h1.name em { font-style: italic; }
       to: 'To', none: 'not provided', subject: 'Website contact'
     },
     es: {
-      r1: 'Presidente', o1: 'Liga Brasileña de Esperanto', r2: 'Secretario Ejecutivo', o2: 'Secretaría de Estado de Medio Ambiente y Recursos Hídricos de Alagoas', r3: 'Abogado', o3: 'Derecho Civil, Derecho Administrativo y Derecho Electoral', r4: 'Investigador', o4: 'Regulación, Contratos e Infraestructura',
+      r1: 'Presidente', o1: 'Liga Brasileña de Esperanto', r2: 'Secretario Ejecutivo', o2: 'Secretaría de Estado de Medio Ambiente y Recursos Hídricos de Alagoas', r3: 'Abogado', o3: 'OAB/AL nº 20.662', r4: 'Investigador', o4: 'Regulación, Contratos e Infraestructura',
       html: 'es', invert: 'Invertir colores', lang: 'Idioma',
       h1: '¡Hola,<br>soy Querino!',
       lead: 'Abogado con especialización en Regulación y Gobernanza (UFAL), Argumentación y Justicia (UFRGS), Turismo y Desarrollo (UNIRIO) y Cultura Popular Brasileña (URCA).',
