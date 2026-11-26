@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Querino Neto</title>
-<meta name="description" content="José Querino de Macêdo Neto: Presidente da Liga Brasileira de Esperanto, Secretário Executivo da Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas, advogado (OAB/AL nº 20.662) e pesquisador em Regulação, Contratos e Infraestrutura.">
+<meta name="description" content="José Querino de Macêdo Neto: advogado (OAB/AL nº 20.662), Presidente da Liga Brasileira de Esperanto e Secretário Executivo da Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas. Pesquisa e escreve sobre regulação econômica, qualidade regulatória, contratos públicos e governança no setor de infraestrutura.">
 <link rel="canonical" href="https://querinoneto.com.br/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="José Querino de Macêdo Neto">
@@ -27,9 +27,9 @@
     "Presidente da Liga Brasileira de Esperanto",
     "Secretário Executivo da Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas",
     "Advogado",
-    "Pesquisador em Regulação, Contratos e Infraestrutura"
+    "Pesquisador em regulação econômica, contratos públicos e governança em infraestrutura"
    ],
-   "description": "Presidente da Liga Brasileira de Esperanto, Secretário Executivo da SEMARH/AL, advogado (OAB/AL nº 20.662) e pesquisador em Regulação, Contratos e Infraestrutura.",
+   "description": "Advogado (OAB/AL nº 20.662), Presidente da Liga Brasileira de Esperanto e Secretário Executivo da SEMARH/AL. Pesquisa regulação econômica, contratos públicos e governança em infraestrutura.",
    "url": "https://querinoneto.com.br/",
    "image": "https://querinoneto.com.br/assets/querino-neto-foto.jpg",
    "email": "mailto:contato@querinoneto.com.br",
@@ -134,11 +134,12 @@
     }
    ],
    "knowsAbout": [
-    "Regulação",
-    "Contratos",
+    "Regulação econômica",
+    "Qualidade regulatória",
+    "Contratos públicos",
+    "Governança",
     "Infraestrutura",
     "Direito",
-    "Meio ambiente",
     "Esperanto"
    ]
   },
@@ -179,7 +180,7 @@
 <meta property="og:site_name" content="Querino Neto">
 <meta property="og:url" content="https://querinoneto.com.br/">
 <meta property="og:title" content="Querino Neto">
-<meta property="og:description" content="Presidente da Liga Brasileira de Esperanto, Secretário Executivo da SEMARH/AL, advogado (OAB/AL nº 20.662) e pesquisador em Regulação, Contratos e Infraestrutura.">
+<meta property="og:description" content="Advogado (OAB/AL nº 20.662), Presidente da Liga Brasileira de Esperanto e Secretário Executivo da SEMARH/AL. Pesquisa regulação econômica, contratos públicos e governança em infraestrutura.">
 <meta property="og:image" content="https://querinoneto.com.br/assets/compartilhar.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -190,7 +191,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@querinoneto">
 <meta name="twitter:title" content="Querino Neto">
-<meta name="twitter:description" content="Presidente da Liga Brasileira de Esperanto, Secretário Executivo da SEMARH/AL, advogado (OAB/AL nº 20.662) e pesquisador em Regulação, Contratos e Infraestrutura.">
+<meta name="twitter:description" content="Advogado (OAB/AL nº 20.662), Presidente da Liga Brasileira de Esperanto e Secretário Executivo da SEMARH/AL. Pesquisa regulação econômica, contratos públicos e governança em infraestrutura.">
 <meta name="twitter:image" content="https://querinoneto.com.br/assets/compartilhar.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -410,7 +411,7 @@ h1.name { font: italic 400 clamp(2.4rem, 3.4vw, 3.2rem)/1.05 var(--serif); lette
 }
 /* Computador: cartão mais largo; os cargos se ajustam para a linha da Secretaria caber inteira */
 @media (min-width: 861px) {
-  .card { max-width: min(1000px, calc((100dvh - 365px) * 1.837)); min-width: min(600px, 100%); }
+  .card { max-width: min(1000px, calc((100dvh - 400px) * 1.837)); min-width: min(600px, 100%); }
   .idb { padding: 1.5rem 2.5rem .15rem; }
   .copy { padding: .9rem 2.5rem 1.85rem; container-type: inline-size; }
   .copy { --t: min(1.05rem, calc(100cqi / 45.5)); }
@@ -433,6 +434,21 @@ h1.name b, .sheet-head h2 b { color: var(--ink); }
 /* Cantos retos em tudo, exceto os cantos de cima da foto */
 .card, .card[class] { border-radius: 20px 20px 0 0 !important; }
 .sheet { border-radius: 0; }
+
+/* Linha de pesquisa: frase corrida abaixo dos cargos */
+.bio { margin-top: .75rem; font-size: inherit; line-height: 1.5; color: var(--mute); max-width: 46rem; }
+@media (min-width: 861px) { .bio { font-size: var(--t); margin-top: .8rem; } }
+@media (max-width: 860px) { .bio { font-size: .92rem; margin-top: .6rem; } }
+@media (max-width: 420px) and (max-height: 640px) { .bio { font-size: .85rem; margin-top: .45rem; } }
+@media (min-width: 861px) and (max-height: 800px) {
+  .card { max-width: min(1000px, calc((100dvh - 330px) * 1.837)); }
+  .idb { padding-top: 1rem; }
+  .idb h1.name { font-size: 2.2rem; }
+  .copy { padding-top: .6rem; padding-bottom: 1.2rem; }
+  .creds { gap: .2rem; }
+  .bio { margin-top: .5rem; line-height: 1.4; }
+  .copy .links { margin-top: .9rem; }
+}
 </style>
 </head>
 <body>
@@ -452,9 +468,9 @@ h1.name b, .sheet-head h2 b { color: var(--ink); }
       <div class="creds">
         <p><b data-i18n="r3">Advogado</b><span class="dot"> · </span><span data-i18n="o3">OAB/AL nº 20.662</span></p>
         <p><b data-i18n="r1">Presidente</b><span class="dot"> · </span><span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
-        <p><b data-i18n="r4">Pesquisador</b><span class="dot"> · </span><span data-i18n="o4">Regulação, Contratos e Infraestrutura</span></p>
         <p><b data-i18n="r2">Secretário Executivo</b><span class="dot"> · </span><span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
       </div>
+      <p class="bio">Pesquisa e escreve sobre regulação econômica, qualidade regulatória, contratos públicos e governança no setor de infraestrutura.</p>
       <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
         <button class="lk primary" type="button" id="openForm"><span data-i18n="open">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button>
         <div class="social">
