@@ -429,6 +429,10 @@ h1.name, .sheet-head h2 { color: #8a8a8a; }
 h1.name b, .sheet-head h2 b { color: var(--ink); }
 /* Separador discreto entre cargo e instituição */
 .creds .dot { display: inline-block; margin: 0 .1em; white-space: pre; color: color-mix(in srgb, var(--mute) 70%, transparent); font-weight: 700; transform: translateY(-.02em); }
+
+/* Cantos retos em tudo, exceto os cantos de cima da foto */
+.card, .card[class] { border-radius: 20px 20px 0 0 !important; }
+.sheet { border-radius: 0; }
 </style>
 </head>
 <body>
