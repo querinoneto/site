@@ -453,6 +453,8 @@ h1.name b, .sheet-head h2 b { color: var(--ink); }
 h1.name, .sheet-head h2 { font-style: normal; color: var(--ink); }
 /* Título inteiro com o mesmo peso levemente encorpado */
 h1.name, .sheet-head h2 { -webkit-text-stroke: .022em currentColor; paint-order: stroke fill; }
+/* Frase da pesquisa justificada, com hifenização para evitar espaços largos */
+.bio { text-align: justify; text-justify: inter-word; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 6 3 3; overflow-wrap: break-word; }
 </style>
 </head>
 <body>
@@ -474,7 +476,7 @@ h1.name, .sheet-head h2 { -webkit-text-stroke: .022em currentColor; paint-order:
         <p><b data-i18n="r1">Presidente</b><span class="dot"> · </span><span data-i18n="o1">Liga Brasileira de Esperanto</span></p>
         <p><b data-i18n="r2">Secretário Executivo</b><span class="dot"> · </span><span data-i18n="o2">Secretaria de Estado do Meio Ambiente e dos Recursos Hídricos de Alagoas</span></p>
       </div>
-      <p class="bio">Pesquisa e escreve sobre regulação econômica, qualidade regulatória, contratos públicos e governança no setor de infraestrutura.</p>
+      <p class="bio" lang="pt-BR">Pesquisa e escreve sobre regulação econômica, qualidade regulatória, contratos públicos e governança no setor de infraestrutura.</p>
       <nav class="links" data-i18n-aria="links" aria-label="Contato e redes sociais">
         <button class="lk primary" type="button" id="openForm"><span data-i18n="open">Enviar mensagem</span> <span class="ar" aria-hidden="true">→</span></button>
         <div class="social">
